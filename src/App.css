@@ -1,0 +1,99 @@
+.app-container {
+  background-color: #000000;
+  color: #ffffff;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.button-container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.glow-button {
+  border: none;
+  outline: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
+  transition: box-shadow 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.glow-button.start {
+  background-color: #00ff00;
+}
+
+.glow-button.stop {
+  background-color: #ff0000;
+}
+
+.glow-button.reset {
+  background-color: #ffcc00;
+}
+
+.glow-button.copy {
+  background-color: #00bfff;
+}
+
+.glow-button:hover {
+  box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.8);
+}
+
+.transcript-container {
+  margin-bottom: 20px;
+}
+.transcript-text {
+  width: 400px;
+  height: 200px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: none;
+  outline: none;
+  padding: 10px;
+  color: #ffffff;
+  font-size: 16px;
+  font-family: "Courier New", monospace;
+  resize: none;
+}
+
+.interim-transcript {
+  color: #00ff00;
+  font-size: 16px;
+}
+
+.toast {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #ffffff;
+  padding: 10px;
+  border-radius: 5px;
+  animation: fade-in-out 1s ease-in-out;
+}
+
+@keyframes fade-in-out {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
