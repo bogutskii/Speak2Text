@@ -1,10 +1,11 @@
 {
-  "homepage": "https://bogutskii.github.io/Speak2Text/",
+  "homepage": "https://bogutskii.github.io/speak2text/",
   "name": "speak2text",
   "version": "1.0.0",
   "description": "React app for converting speech to text",
   "scripts": {
     "start": "react-scripts start",
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
