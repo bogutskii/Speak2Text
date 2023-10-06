@@ -1,6 +1,8 @@
+/* App.css */
+
 .app-container {
-  background-color: #000000;
-  color: #ffffff;
+  background-color: #97afb6;
+  color: #000000;
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -28,39 +30,42 @@
   padding: 10px 20px;
   font-size: 16px;
   font-weight: bold;
-  border-radius: 5px;
-  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
-  transition: box-shadow 0.3s ease-in-out;
+  border-radius: 10px;
+  background-color: transparent;
+  color: #ffffff;
   cursor: pointer;
+  position: relative;
+  transition: background-color 0.5s ease-in-out;
 }
 
 .glow-button.start {
-  background-color: #00ff00;
+  background-color: #88d280;
 }
 
 .glow-button.stop {
-  background-color: #ff0000;
+  background-color: #f76666;
+  color: #ffffff;
+  animation: pulse-shadow 1s infinite alternate;
 }
 
 .glow-button.reset {
-  background-color: #ffcc00;
+  background-color: #eed469;
+  color: #ffffff;
 }
 
 .glow-button.copy {
-  background-color: #00bfff;
-}
-
-.glow-button:hover {
-  box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.8);
+  background-color: #62cef2;
+  color: #ffffff;
 }
 
 .transcript-container {
   margin-bottom: 20px;
 }
+
 .transcript-text {
   width: 400px;
   height: 200px;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(0, 0, 0, 0.1);
   border: none;
   outline: none;
   padding: 10px;
@@ -71,7 +76,7 @@
 }
 
 .interim-transcript {
-  color: #00ff00;
+  color: #7ae57a;
   font-size: 16px;
 }
 
@@ -86,14 +91,11 @@
   animation: fade-in-out 1s ease-in-out;
 }
 
-@keyframes fade-in-out {
+@keyframes pulse-shadow {
   0% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
+    box-shadow: 0px 0px 10px rgba(255, 0, 0, 0.5);
   }
   100% {
-    opacity: 0;
+    box-shadow: 0px 0px 20px rgba(255, 0, 0, 0.8);
   }
 }
