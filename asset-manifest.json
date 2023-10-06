@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/Speak2Text/static/css/main.97fcb357.css",
-    "main.js": "/Speak2Text/static/js/main.bef91135.js",
-    "index.html": "/Speak2Text/index.html",
-    "main.97fcb357.css.map": "/Speak2Text/static/css/main.97fcb357.css.map",
-    "main.bef91135.js.map": "/Speak2Text/static/js/main.bef91135.js.map"
+    "main.css": "/speak2text/static/css/main.97fcb357.css",
+    "main.js": "/speak2text/static/js/main.bef91135.js",
+    "index.html": "/speak2text/index.html",
+    "main.97fcb357.css.map": "/speak2text/static/css/main.97fcb357.css.map",
+    "main.bef91135.js.map": "/speak2text/static/js/main.bef91135.js.map"
   },
   "entrypoints": [
     "static/css/main.97fcb357.css",
