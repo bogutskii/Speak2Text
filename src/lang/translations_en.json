@@ -1,0 +1,9 @@
+{
+    "app_title": "Speech Recognition Extension",
+    "start_button_text": "Start",
+    "stop_button_text": "Stop",
+    "reset_button_text": "Reset",
+    "copy_button_text": "Copy Text",
+    "microphone_error_text": "Microphone is unavailable. Please check your microphone settings.",
+    "text_copied_toast": "Text copied to clipboard"
+  }

@@ -30,32 +30,32 @@
   padding: 10px 20px;
   font-size: 16px;
   font-weight: bold;
-  border-radius: 10px;
-  background-color: transparent;
-  color: #ffffff;
+  border-radius: 10px; /* Изменяем форму кнопок */
+  background-color: transparent; /* Убираем фон кнопок */
+  color: #ffffff; /* Белый текст */
   cursor: pointer;
-  position: relative;
-  transition: background-color 0.5s ease-in-out;
+  position: relative; /* Добавляем положение для тени */
+  transition: background-color 0.5s ease-in-out; /* Добавляем плавные переходы для фона кнопки */
 }
 
 .glow-button.start {
-  background-color: #88d280;
+  background-color: #88d280; /* Пастельно-зеленый цвет */
 }
 
 .glow-button.stop {
   background-color: #f76666;
-  color: #ffffff;
-  animation: pulse-shadow 1s infinite alternate;
+  color: #ffffff; /* Белый текст */
+  animation: pulse-shadow 1s infinite alternate; /* Анимация пульсации для тени */
 }
 
 .glow-button.reset {
   background-color: #eed469;
-  color: #ffffff;
+  color: #ffffff; /* Белый текст */
 }
 
 .glow-button.copy {
   background-color: #62cef2;
-  color: #ffffff;
+  color: #ffffff; /* Белый текст */
 }
 
 .transcript-container {
@@ -65,11 +65,11 @@
 .transcript-text {
   width: 400px;
   height: 200px;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.1); /* Светлый фон с небольшой непрозрачностью */
   border: none;
   outline: none;
   padding: 10px;
-  color: #ffffff;
+  color: #ffffff; /* Белый текст */
   font-size: 16px;
   font-family: "Courier New", monospace;
   resize: none;

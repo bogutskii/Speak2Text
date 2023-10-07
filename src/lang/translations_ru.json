@@ -1,0 +1,10 @@
+{
+    "app_title": "Распознавание речи",
+    "start_button_text": "Начать",
+    "stop_button_text": "Стоп",
+    "reset_button_text": "Сброс",
+    "copy_button_text": "Копировать текст",
+    "microphone_error_text": "Микрофон недоступен. Пожалуйста, проверьте настройки микрофона.",
+    "text_copied_toast": "Текст скопирован в буфер обмена"
+  }
+  

@@ -2,12 +2,11 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 
 const SpeechRecognition =
-    window.SpeechRecognition || window.webkitSpeechRecognition;
+  window.SpeechRecognition || window.webkitSpeechRecognition;
 const recognition = new SpeechRecognition();
 
 recognition.continuous = true;
 recognition.interimResults = true;
-recognition.lang = "ru-RU";
 
 function App() {
   const [finalTranscript, setFinalTranscript] = useState("");
@@ -15,6 +14,14 @@ function App() {
   const [isListening, setIsListening] = useState(false);
   const [showToast, setShowToast] = useState(false);
   const [microphoneError, setMicrophoneError] = useState(false);
+  const [language, setLanguage] = useState("en"); // Изначально устанавливаем английский язык
+  const [translations, setTranslations] = useState({}); // Состояние для хранения переводов
+
+  // Загрузка переводов из JSON файла
+  useEffect(() => {
+    const langFile = require(`./lang/translations_${language}.json`);
+    setTranslations(langFile);
+  }, [language]);
 
   useEffect(() => {
     recognition.onresult = function (event) {
@@ -79,37 +86,39 @@ function App() {
   };
 
   return (
-      <div className="app-container">
-        <div className="title">Speech Recognition Extension</div>
-        <div className="button-container">
-          <button
-              className={`glow-button ${isListening ? "stop" : "start"}`}
-              onClick={toggleListening}
-          >
-            {isListening ? "Stop" : "Start"}
-          </button>
-          <button className="glow-button reset" onClick={resetTranscript}>
-            Reset
-          </button>
-          <button className="glow-button copy" onClick={copyToClipboard}>
-            Copy Text
-          </button>
-        </div>
-        {microphoneError && (
-            <div className="microphone-error">
-              Microphone is unavailable. Please check your microphone settings.
-            </div>
-        )}
-        <div className="transcript-container">
-        <textarea
-            className="transcript-text"
-            value={finalTranscript}
-            onChange={(e) => setFinalTranscript(e.target.value)}
-        ></textarea>
-        </div>
-        <div className="interim-transcript">{interimTranscript}</div>
-        {showToast && <Toast message="Text copied to clipboard" />}
+    <div className="app-container">
+      <div className="title">{translations.app_title}</div>
+      <div className="language-toggle">
+        <button onClick={() => setLanguage("en")}>English</button>
+        <button onClick={() => setLanguage("ru")}>Русский</button>
       </div>
+      <div className="button-container">
+        <button
+          className={`glow-button ${isListening ? "stop" : "start"}`}
+          onClick={toggleListening}
+        >
+          {isListening ? translations.stop_button_text : translations.start_button_text}
+        </button>
+        <button className="glow-button reset" onClick={resetTranscript}>
+          {translations.reset_button_text}
+        </button>
+        <button className="glow-button copy" onClick={copyToClipboard}>
+          {translations.copy_button_text}
+        </button>
+      </div>
+      {microphoneError && (
+        <div className="microphone-error">{translations.microphone_error_text}</div>
+      )}
+      <div className="transcript-container">
+        <textarea
+          className="transcript-text"
+          value={finalTranscript}
+          onChange={(e) => setFinalTranscript(e.target.value)}
+        ></textarea>
+      </div>
+      <div className="interim-transcript">{interimTranscript}</div>
+      {showToast && <Toast message={translations.text_copied_toast} />}
+    </div>
   );
 }
 
