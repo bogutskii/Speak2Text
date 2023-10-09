@@ -17,7 +17,6 @@ function App() {
   const [language, setLanguage] = useState("en"); // Изначально устанавливаем английский язык
   const [translations, setTranslations] = useState({}); // Состояние для хранения переводов
 
-  // Загрузка переводов из JSON файла
   useEffect(() => {
     const langFile = require(`./lang/translations_${language}.json`);
     setTranslations(langFile);
@@ -87,17 +86,32 @@ function App() {
 
   return (
     <div className="app-container">
-      <div className="title">{translations.app_title}</div>
-      <div className="language-toggle">
-        <button onClick={() => setLanguage("en")}>English</button>
-        <button onClick={() => setLanguage("ru")}>Русский</button>
+      <div className="top-section">
+        <div className="language-toggle">
+          <button
+            className={`glow-button ${language === "en" ? "lang" : "empty"}`}
+            onClick={() => setLanguage("en")}
+          >
+            Eng
+          </button>
+          <button
+            className={`glow-button ${language === "ru" ? "lang" : "empty"}`}
+            onClick={() => setLanguage("ru")}
+          >
+            Рус
+          </button>
+        </div>
+        <div className="title">{translations.app_title}</div>
       </div>
+
       <div className="button-container">
         <button
           className={`glow-button ${isListening ? "stop" : "start"}`}
           onClick={toggleListening}
         >
-          {isListening ? translations.stop_button_text : translations.start_button_text}
+          {isListening
+            ? translations.stop_button_text
+            : translations.start_button_text}
         </button>
         <button className="glow-button reset" onClick={resetTranscript}>
           {translations.reset_button_text}
@@ -107,7 +121,9 @@ function App() {
         </button>
       </div>
       {microphoneError && (
-        <div className="microphone-error">{translations.microphone_error_text}</div>
+        <div className="microphone-error">
+          {translations.microphone_error_text}
+        </div>
       )}
       <div className="transcript-container">
         <textarea

@@ -1,8 +1,7 @@
 // AudioVisualizer.js
 
 import React from "react";
-import "./AudioVisualizer.css"; // Создайте CSS-файл для стилей
-
+import "./AudioVisualizer.css"; 
 const AudioVisualizer = ({ volume }) => {
   const barStyle = {
     width: `${volume * 100}%`,
