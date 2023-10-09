@@ -14,8 +14,8 @@ function App() {
   const [isListening, setIsListening] = useState(false);
   const [showToast, setShowToast] = useState(false);
   const [microphoneError, setMicrophoneError] = useState(false);
-  const [language, setLanguage] = useState("en"); // Изначально устанавливаем английский язык
-  const [translations, setTranslations] = useState({}); // Состояние для хранения переводов
+  const [language, setLanguage] = useState("en"); 
+  const [translations, setTranslations] = useState({});
 
   useEffect(() => {
     const langFile = require(`./lang/translations_${language}.json`);

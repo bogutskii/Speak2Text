@@ -3,7 +3,7 @@ body {
 }
 
 .app-container {
-  background-color: #97afb6;
+  background-color: #90a4ae;
   color: #000000;
   padding: 20px;
   display: flex;
@@ -41,27 +41,27 @@ body {
 }
 
 .glow-button.start {
-  background-color: #88d280;
+  background-color: #43a047;
 }
 
 .glow-button.stop {
-  background-color: #f76666;
+  background-color: #ff3d00;
   color: #ffffff;
   animation: pulse-shadow 1s infinite alternate;
 }
 
 .glow-button.reset {
-  background-color: #eed469;
+  background-color: #795548;
   color: #ffffff;
 }
 
 .glow-button.copy {
-  background-color: #62cef2;
+  background-color: #546e7a;
   color: #ffffff;
 }
 
 .glow-button.lang {
-  background-color: #a87bf7;
+  background-color: #40c4ff;
   color: #ffffff;
 }
 
@@ -105,7 +105,7 @@ body {
 
 @keyframes pulse-shadow {
   0% {
-    box-shadow: 0px 0px 10px rgba(255, 0, 0, 0.5);
+    box-shadow: 0px 0px 10px rgba(255, 0, 0, 0.363);
   }
   100% {
     box-shadow: 0px 0px 20px rgba(255, 0, 0, 0.8);
