@@ -1,5 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { connect } from 'react-redux';
+import { updateFinalTranscript, updateInterimTranscript } from '../actions/transcriptActions';
 import "./App.css";
+import Toast from "./Toast";
 
 const SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -16,9 +19,11 @@ function App() {
   const [microphoneError, setMicrophoneError] = useState(false);
   const [language, setLanguage] = useState("en"); 
   const [translations, setTranslations] = useState({});
+  const [lastRecognitionStartTime, setLastRecognitionStartTime] = useState(0);
+
 
   useEffect(() => {
-    const langFile = require(`./lang/translations_${language}.json`);
+    const langFile = require(`../lang/translations_${language}.json`);
     setTranslations(langFile);
   }, [language]);
 
@@ -28,7 +33,7 @@ function App() {
       for (let i = event.resultIndex; i < event.results.length; i++) {
         const transcript = event.results[i][0].transcript;
         if (event.results[i].isFinal) {
-          setFinalTranscript((prevTranscript) => prevTranscript + " " + transcript);
+          setFinalTranscript((prevTranscript) => prevTranscript +  transcript);
         } else {
           interimTranscript += transcript;
         }
@@ -52,12 +57,17 @@ function App() {
   }, [isListening]);
 
   const toggleListening = () => {
+    const currentTime = Date.now();
+    
     if (isListening) {
-      setIsListening(false);
-      recognition.stop();
+      if (currentTime - lastRecognitionStartTime >= 1000) {
+        setIsListening(false);
+        recognition.stop();
+      }
     } else {
       setIsListening(true);
       recognition.start();
+      setLastRecognitionStartTime(currentTime);
     }
   };
 
@@ -138,8 +148,17 @@ function App() {
   );
 }
 
-function Toast({ message }) {
-  return <div className="toast">{message}</div>;
-}
 
-export default App;
+const mapStateToProps = state => ({
+  finalTranscript: state.transcript.finalTranscript,
+  interimTranscript: state.transcript.interimTranscript,
+});
+
+const mapDispatchToProps = dispatch => ({
+  updateFinalTranscript: transcript =>
+    dispatch(updateFinalTranscript(transcript)),
+  updateInterimTranscript: transcript =>
+    dispatch(updateInterimTranscript(transcript)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
