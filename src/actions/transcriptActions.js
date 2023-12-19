@@ -8,3 +8,9 @@ export const updateFinalTranscript = (transcript) => ({
     payload: transcript,
   });
   
+  export const toggleRule = (ruleName) => {
+    return {
+      type: 'TOGGLE_RULE',
+      ruleName,
+    };
+  };

@@ -1,10 +1,22 @@
 {
-    "app_title": "Распознавание речи",
-    "start_button_text": "Начать",
-    "stop_button_text": "Стоп",
-    "reset_button_text": "Сброс",
-    "copy_button_text": "Копировать текст",
-    "microphone_error_text": "Микрофон недоступен. Пожалуйста, проверьте настройки микрофона.",
-    "text_copied_toast": "Текст скопирован в буфер обмена"
-  }
-  
+  "app_title": "Распознавание речи",
+  "start_button_text": "Начать",
+  "stop_button_text": "Стоп",
+  "reset_button_text": "Сброс",
+  "copy_button_text": "Копировать текст",
+  "microphone_error_text": "Микрофон недоступен. Пожалуйста, проверьте настройки микрофона.",
+  "text_copied_toast": "Текст скопирован в буфер обмена",
+  "labelRecognition": "Язык распознавание речи",
+  "languages": [
+    { "code": "en", "name": "Английский" },
+    { "code": "es", "name": "Испанский" },
+    { "code": "fr", "name": "Французский" },
+    { "code": "de", "name": "Немецкий" },
+    { "code": "it", "name": "Итальянский" },
+    { "code": "pt", "name": "Португальский" },
+    { "code": "ru-RU", "name": "Русский" },
+    { "code": "zh-CN", "name": "Китайский (упрощенный)" },
+    { "code": "ja", "name": "Японский" },
+    { "code": "ko", "name": "Корейский" }
+  ]
+}

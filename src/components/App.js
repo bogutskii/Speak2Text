@@ -1,13 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { connect } from 'react-redux';
-import { updateFinalTranscript, updateInterimTranscript } from '../actions/transcriptActions';
+import { connect } from "react-redux";
+import {
+  updateFinalTranscript,
+  updateInterimTranscript,
+} from "../actions/transcriptActions";
 import "./App.css";
 import Toast from "./Toast";
+import ButtonContainer from "./ButtonContainer";
+import LanguageToggle from "./LanguageToggle";
+import MicrophoneError from "./MicrophoneError";
+import TranscriptDisplay from "./TranscriptContainer";
+import RulesComponent from "./RulesComponent";
+import LanguageSelector from "./LanguageSelector";
 
 const SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
 const recognition = new SpeechRecognition();
-
+recognition.lang = "ru-RU";
 recognition.continuous = true;
 recognition.interimResults = true;
 
@@ -17,10 +26,10 @@ function App() {
   const [isListening, setIsListening] = useState(false);
   const [showToast, setShowToast] = useState(false);
   const [microphoneError, setMicrophoneError] = useState(false);
-  const [language, setLanguage] = useState("en"); 
+  const [language, setLanguage] = useState("en");
   const [translations, setTranslations] = useState({});
   const [lastRecognitionStartTime, setLastRecognitionStartTime] = useState(0);
-
+  const [recognitionLanguage, setRecognitionLanguage] = useState("ru-RU");
 
   useEffect(() => {
     const langFile = require(`../lang/translations_${language}.json`);
@@ -33,7 +42,7 @@ function App() {
       for (let i = event.resultIndex; i < event.results.length; i++) {
         const transcript = event.results[i][0].transcript;
         if (event.results[i].isFinal) {
-          setFinalTranscript((prevTranscript) => prevTranscript +  transcript);
+          setFinalTranscript((prevTranscript) => prevTranscript + transcript);
         } else {
           interimTranscript += transcript;
         }
@@ -57,8 +66,8 @@ function App() {
   }, [isListening]);
 
   const toggleListening = () => {
+    setMicrophoneError(false);
     const currentTime = Date.now();
-    
     if (isListening) {
       if (currentTime - lastRecognitionStartTime >= 1000) {
         setIsListening(false);
@@ -66,6 +75,7 @@ function App() {
       }
     } else {
       setIsListening(true);
+      recognition.stop();
       recognition.start();
       setLastRecognitionStartTime(currentTime);
     }
@@ -94,70 +104,65 @@ function App() {
     }, 500);
   };
 
+  const handleRecognitionLanguageChange = (selectedLanguage) => {
+    setRecognitionLanguage(selectedLanguage);
+    recognition.lang = selectedLanguage;
+    setIsListening(false);
+    recognition.stop();
+  };
+
   return (
     <div className="app-container">
       <div className="top-section">
-        <div className="language-toggle">
-          <button
-            className={`glow-button ${language === "en" ? "lang" : "empty"}`}
-            onClick={() => setLanguage("en")}
-          >
-            Eng
-          </button>
-          <button
-            className={`glow-button ${language === "ru" ? "lang" : "empty"}`}
-            onClick={() => setLanguage("ru")}
-          >
-            Рус
-          </button>
-        </div>
+        <LanguageSelector
+          onLanguageChange={setLanguage}
+          onRecognitionLanguageChange={handleRecognitionLanguageChange}
+          currentLanguage={recognitionLanguage}
+          labelRecognition={translations.labelRecognition}
+          languages ={translations.languages}        />
+        <LanguageToggle onLanguageChange={setLanguage} language={language} />
         <div className="title">{translations.app_title}</div>
       </div>
 
-      <div className="button-container">
-        <button
-          className={`glow-button ${isListening ? "stop" : "start"}`}
-          onClick={toggleListening}
-        >
-          {isListening
-            ? translations.stop_button_text
-            : translations.start_button_text}
-        </button>
-        <button className="glow-button reset" onClick={resetTranscript}>
-          {translations.reset_button_text}
-        </button>
-        <button className="glow-button copy" onClick={copyToClipboard}>
-          {translations.copy_button_text}
-        </button>
-      </div>
+      <ButtonContainer
+        isListening={isListening}
+        onStart={toggleListening}
+        onStop={toggleListening}
+        onReset={resetTranscript}
+        onCopy={copyToClipboard}
+        startButtonText={translations.start_button_text}
+        stopButtonText={translations.stop_button_text}
+        resetButtonText={translations.reset_button_text}
+        copyButtonText={translations.copy_button_text}
+      />
+
       {microphoneError && (
-        <div className="microphone-error">
-          {translations.microphone_error_text}
-        </div>
+        <MicrophoneError errorMessage={translations.microphone_error_text} />
       )}
-      <div className="transcript-container">
-        <textarea
-          className="transcript-text"
-          value={finalTranscript}
-          onChange={(e) => setFinalTranscript(e.target.value)}
-        ></textarea>
-      </div>
+
+      <TranscriptDisplay
+        finalTranscript={finalTranscript}
+        interimTranscript={interimTranscript}
+        showToast={showToast}
+        translations={translations}
+      />
+
+      <RulesComponent />
       <div className="interim-transcript">{interimTranscript}</div>
       {showToast && <Toast message={translations.text_copied_toast} />}
     </div>
   );
 }
 
-
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   finalTranscript: state.transcript.finalTranscript,
   interimTranscript: state.transcript.interimTranscript,
 });
 
-const mapDispatchToProps = dispatch => ({
-  updateFinalTranscript: transcript =>
+const mapDispatchToProps = (dispatch) => ({
+  updateFinalTranscript: (transcript) =>
     dispatch(updateFinalTranscript(transcript)),
-  updateInterimTranscript: transcript =>
+  updateInterimTranscript: (transcript) =>
     dispatch(updateInterimTranscript(transcript)),
 });
 

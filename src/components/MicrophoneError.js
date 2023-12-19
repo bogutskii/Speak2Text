@@ -1,9 +1,9 @@
 import React from 'react';
 
-const MicrophoneError = () => {
+const MicrophoneError = ({ errorMessage }) => {
   return (
     <div className="microphone-error">
-      Microphone Error Message
+      {errorMessage}
     </div>
   );
 };

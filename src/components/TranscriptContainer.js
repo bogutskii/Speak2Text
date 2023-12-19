@@ -1,16 +1,16 @@
 import React from 'react';
 
-const TranscriptContainer = ({ finalTranscript, interimTranscript }) => {
+const TranscriptTextArea = ({ finalTranscript, setFinalTranscript }) => {
   return (
     <div className="transcript-container">
       <textarea
         className="transcript-text"
         value={finalTranscript}
-        onChange={() => {}}
+        onChange={(e) => setFinalTranscript(e.target.value)}
       ></textarea>
-      <div className="interim-transcript">{interimTranscript}</div>
     </div>
   );
 };
 
-export default TranscriptContainer;
+
+export default TranscriptTextArea;

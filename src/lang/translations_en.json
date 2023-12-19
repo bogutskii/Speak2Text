@@ -5,5 +5,18 @@
   "reset_button_text": "Reset",
   "copy_button_text": "Copy",
   "microphone_error_text": "Microphone error",
-  "text_copied_toast": "Text copied to clipboard"
+  "text_copied_toast": "Text copied to clipboard",
+  "labelRecognition": "Recognition language",
+  "languages": [
+    { "code": "en", "name": "English" },
+    { "code": "es", "name": "Spanish" },
+    { "code": "fr", "name": "French" },
+    { "code": "de", "name": "German" },
+    { "code": "it", "name": "Italian" },
+    { "code": "pt", "name": "Portuguese" },
+    { "code": "ru-RU", "name": "Russian" },
+    { "code": "zh-CN", "name": "Chinese (Simplified)" },
+    { "code": "ja", "name": "Japanese" },
+    { "code": "ko", "name": "Korean" }
+  ]
 }
