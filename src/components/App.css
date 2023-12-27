@@ -18,9 +18,9 @@ body {
   font-size: 36px;
   font-weight: 900;
   text-align: center;
-  color: #e9ff22; /* Choose a bold color that matches your design */
-  text-transform: uppercase; /* Uppercase text for a more impactful look */
-  letter-spacing: 5px; /* Wider letter spacing for emphasis */
+  color: #e9ff22;
+  text-transform: uppercase;
+  letter-spacing: 5px;
   margin: 20px 0;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
@@ -80,8 +80,8 @@ body {
 }
 
 .transcript-text {
-  width: 400px;
-  height: 200px;
+  width: 80vw;
+  height: 60vh;
   background-color: rgba(0, 0, 0, 0.1);
   border: none;
   outline: none;
@@ -94,7 +94,7 @@ body {
 
 .interim-transcript {
   font-size: 16px;
-  color: #34ff4b; 
+  color: #34ff4b;
 }
 
 

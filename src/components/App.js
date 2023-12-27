@@ -7,9 +7,9 @@ import {
 import "./App.css";
 import Toast from "./Toast";
 import ButtonContainer from "./ButtonContainer";
-import LanguageToggle from "./LanguageToggle";
+import LanguageInterfaceToggle from "./LanguageInterfaceToggle";
 import MicrophoneError from "./MicrophoneError";
-import TranscriptDisplay from "./TranscriptContainer";
+import TranscriptTextArea from "./TranscriptContainer";
 import RulesComponent from "./RulesComponent";
 import LanguageSelector from "./LanguageSelector";
 
@@ -119,8 +119,14 @@ function App() {
           onRecognitionLanguageChange={handleRecognitionLanguageChange}
           currentLanguage={recognitionLanguage}
           labelRecognition={translations.labelRecognition}
-          languages ={translations.languages}        />
-        <LanguageToggle onLanguageChange={setLanguage} language={language} />
+          languages={translations.languages}
+        />
+        <div>
+          <LanguageInterfaceToggle
+            onLanguageChange={setLanguage}
+            language={language}
+          />
+        </div>
         <div className="title">{translations.app_title}</div>
       </div>
 
@@ -140,9 +146,11 @@ function App() {
         <MicrophoneError errorMessage={translations.microphone_error_text} />
       )}
 
-      <TranscriptDisplay
+      <TranscriptTextArea
         finalTranscript={finalTranscript}
         interimTranscript={interimTranscript}
+        setFinalTranscript={setFinalTranscript}
+        setInterimTranscript={setInterimTranscript}
         showToast={showToast}
         translations={translations}
       />
