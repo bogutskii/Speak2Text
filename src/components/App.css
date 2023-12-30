@@ -15,9 +15,14 @@ body {
 }
 
 .title {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 20px;
+  font-size: 36px;
+  font-weight: 900;
+  text-align: center;
+  color: #e9ff22;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  margin: 20px 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .button-container {
@@ -75,8 +80,8 @@ body {
 }
 
 .transcript-text {
-  width: 400px;
-  height: 200px;
+  width: 80vw;
+  height: 40vh;
   background-color: rgba(0, 0, 0, 0.1);
   border: none;
   outline: none;
@@ -89,10 +94,38 @@ body {
 
 .interim-transcript {
   font-size: 16px;
-  color: #34ff4b; 
+  color: #34ff4b;
 }
 
+.options-main {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
 
+.options-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; /* Отступы между элементами */
+  margin-top: 15px; /* Отступ сверху для списка */
+}
+
+.option-item {
+  border: 1px solid #ccc; /* Граница элемента */
+  padding: 10px;
+  border-radius: 5px; /* Скругление углов */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Тень */
+  background-color: #f8f8f8; /* Цвет фона */
+}
+
+.option-label {
+  display: flex;
+  align-items: center;
+}
+
+.option-checkbox {
+  margin-right: 10px;
+}
 
 .toast {
   position: absolute;
