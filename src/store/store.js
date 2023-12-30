@@ -3,6 +3,7 @@ import transcriptReducer from '../reducers/transcriptReducer';
 
 const rootReducer = combineReducers({
   transcript: transcriptReducer,
+  
 });
 
 const store = createStore(rootReducer);

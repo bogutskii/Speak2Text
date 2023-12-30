@@ -3,8 +3,8 @@ const initialState = {
     finalTranscript: "",
     interimTranscript: "",
     rules: [
-      { name: 'Точка', active: false },
-      { name: 'Запятая', active: false },
+      { name: 'точка', active: false , symbol: '.'},
+      { name: 'запятая', active: false, symbol: ',' }
     ],
   };
   

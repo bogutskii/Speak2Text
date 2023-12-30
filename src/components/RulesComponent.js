@@ -2,27 +2,28 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { toggleRule } from '../actions/transcriptActions';
 
-function RulesComponent({ rules, toggleRule }) {
-  const ruleCheckboxes = rules.map((rule) => (
-    <div key={rule.name}>
-      <label>
-        <input
-          type="checkbox"
-          checked={rule.active}
-          onChange={() => toggleRule(rule.name)}
-        />
-        {rule.name}
-      </label>
-    </div>
-  ));
-
+const RulesComponent = ({ rules, toggleRule }) => {
   return (
-    <div>
+    <div className='options-main'>
       <h2>Options</h2>
-      {ruleCheckboxes}
+      <div className='options-list'>
+        {rules.map(rule => (
+          <div key={rule.name} className='option-item'>
+            <label className='option-label'>
+              <input
+                type="checkbox"
+                checked={rule.active}
+                onChange={() => toggleRule(rule.name)}
+                className='option-checkbox'
+              />
+              {rule.name}
+            </label>
+          </div>
+        ))}
+      </div>
     </div>
   );
-}
+};
 
 const mapStateToProps = (state) => ({
   rules: state.transcript.rules,

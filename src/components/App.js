@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import { connect } from "react-redux";
 import {
   updateFinalTranscript,
@@ -20,84 +20,97 @@ recognition.lang = "ru-RU";
 recognition.continuous = true;
 recognition.interimResults = true;
 
-function App() {
-  const [finalTranscript, setFinalTranscript] = useState("");
-  const [interimTranscript, setInterimTranscript] = useState("");
+function App({ finalTranscript, interimTranscript, rules, updateFinalTranscript, updateInterimTranscript }) {
   const [isListening, setIsListening] = useState(false);
   const [showToast, setShowToast] = useState(false);
   const [microphoneError, setMicrophoneError] = useState(false);
   const [language, setLanguage] = useState("en");
   const [translations, setTranslations] = useState({});
-  const [lastRecognitionStartTime, setLastRecognitionStartTime] = useState(0);
   const [recognitionLanguage, setRecognitionLanguage] = useState("ru-RU");
+  const textAreaRef = useRef(null);
 
   useEffect(() => {
-    const langFile = require(`../lang/translations_${language}.json`);
-    setTranslations(langFile);
+    try {
+      const langFile = require(`../lang/translations_${language}.json`);
+      setTranslations(langFile);
+    } catch (error) {
+      console.error("Ошибка загрузки файла локализации:", error);
+    }
   }, [language]);
 
-  useEffect(() => {
-    recognition.onresult = function (event) {
-      let interimTranscript = "";
-      for (let i = event.resultIndex; i < event.results.length; i++) {
-        const transcript = event.results[i][0].transcript;
-        if (event.results[i].isFinal) {
-          setFinalTranscript((prevTranscript) => prevTranscript + transcript);
-        } else {
-          interimTranscript += transcript;
-        }
+  const filterByRule = (text, rules) => {
+    let modifiedText = text;
+    rules.forEach(rule => {
+      if (rule.active) {
+        const regex = new RegExp(`(?<!\\w)${rule.name}(?!\\w)`, "gi");
+        modifiedText = modifiedText.replace(regex, rule.symbol);
       }
-      setInterimTranscript(interimTranscript);
-    };
+    });
+    return modifiedText;
+  };
 
-    recognition.onend = function () {
-      if (isListening) {
-        recognition.start();
+  const handleResult = useCallback((event) => {
+    let interimTranscriptValue = "";
+    
+    for (let i = event.resultIndex; i < event.results.length; ++i) {
+      const transcript = event.results[i][0].transcript;
+      const filteredInterimTranscript = filterByRule(transcript, rules);
+      if (event.results[i].isFinal) {
+        updateFinalTranscript(finalTranscript + filterByRule(transcript, rules));
+      } else {
+        interimTranscriptValue += filteredInterimTranscript;
       }
-    };
+    }
+    updateInterimTranscript(interimTranscriptValue);
+  }, [finalTranscript, updateFinalTranscript, updateInterimTranscript, rules]);
 
-    recognition.onnomatch = function () {
-      setMicrophoneError(true);
-    };
-
-    recognition.onerror = function (event) {
-      setMicrophoneError(true);
-    };
+  const handleEnd = useCallback(() => {
+    if (isListening) {
+      recognition.start();
+    }
   }, [isListening]);
 
+  const handleError = useCallback(() => {
+    setMicrophoneError(true);
+  }, []);
+
+  useEffect(() => {
+    recognition.onresult = handleResult;
+    recognition.onend = handleEnd;
+    recognition.onnomatch = handleError;
+    recognition.onerror = handleError;
+
+    return () => {
+      recognition.onresult = null;
+      recognition.onend = null;
+      recognition.onnomatch = null;
+      recognition.onerror = null;
+    };
+  }, [handleResult, handleEnd, handleError]);
+
   const toggleListening = () => {
-    setMicrophoneError(false);
-    const currentTime = Date.now();
-    if (isListening) {
-      if (currentTime - lastRecognitionStartTime >= 1000) {
-        setIsListening(false);
+    setIsListening((prevIsListening) => {
+      if (prevIsListening) {
         recognition.stop();
+      } else {
+        recognition.start();
       }
-    } else {
-      setIsListening(true);
-      recognition.stop();
-      recognition.start();
-      setLastRecognitionStartTime(currentTime);
-    }
+      return !prevIsListening;
+    });
   };
 
   const resetTranscript = () => {
     setIsListening(false);
-    setFinalTranscript("");
-    setInterimTranscript("");
+    updateFinalTranscript("");
+    updateInterimTranscript("");
     setMicrophoneError(false);
     recognition.stop();
   };
 
   const copyToClipboard = () => {
-    const textToCopy = finalTranscript.trim();
-    const textarea = document.createElement("textarea");
-    textarea.value = textToCopy;
-    document.body.appendChild(textarea);
-    textarea.select();
-    document.execCommand("copy");
-    document.body.removeChild(textarea);
-
+    textAreaRef.current.value = finalTranscript.trim();
+    textAreaRef.current.select();
+    document.execCommand('copy');
     setShowToast(true);
     setTimeout(() => {
       setShowToast(false);
@@ -149,15 +162,15 @@ function App() {
       <TranscriptTextArea
         finalTranscript={finalTranscript}
         interimTranscript={interimTranscript}
-        setFinalTranscript={setFinalTranscript}
-        setInterimTranscript={setInterimTranscript}
+        setFinalTranscript={updateFinalTranscript}
+        setInterimTranscript={updateInterimTranscript}
         showToast={showToast}
         translations={translations}
       />
-
-      <RulesComponent />
       <div className="interim-transcript">{interimTranscript}</div>
+      <RulesComponent />
       {showToast && <Toast message={translations.text_copied_toast} />}
+      <textarea ref={textAreaRef} style={{ position: 'absolute', left: '-9999px' }} />
     </div>
   );
 }
@@ -165,6 +178,7 @@ function App() {
 const mapStateToProps = (state) => ({
   finalTranscript: state.transcript.finalTranscript,
   interimTranscript: state.transcript.interimTranscript,
+  rules: state.transcript.rules
 });
 
 const mapDispatchToProps = (dispatch) => ({

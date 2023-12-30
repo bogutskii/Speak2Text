@@ -81,7 +81,7 @@ body {
 
 .transcript-text {
   width: 80vw;
-  height: 60vh;
+  height: 40vh;
   background-color: rgba(0, 0, 0, 0.1);
   border: none;
   outline: none;
@@ -97,7 +97,35 @@ body {
   color: #34ff4b;
 }
 
+.options-main {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
 
+.options-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; /* Отступы между элементами */
+  margin-top: 15px; /* Отступ сверху для списка */
+}
+
+.option-item {
+  border: 1px solid #ccc; /* Граница элемента */
+  padding: 10px;
+  border-radius: 5px; /* Скругление углов */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Тень */
+  background-color: #f8f8f8; /* Цвет фона */
+}
+
+.option-label {
+  display: flex;
+  align-items: center;
+}
+
+.option-checkbox {
+  margin-right: 10px;
+}
 
 .toast {
   position: absolute;

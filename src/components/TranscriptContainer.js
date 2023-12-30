@@ -1,22 +1,9 @@
 import React from "react";
-
-const TranscriptTextArea = ({
-  finalTranscript,
-  setFinalTranscript,
-  interimTranscript,
-  setInterimTranscript,
-}) => {
-  
-const filterByRule = (text) => {
-
-  console.log(" text.replace",   text.replace(/т/igm, "."))
-  return text.replace(/т/igm, ".");
-}
-const textAreaOnChange = (e) => {
-  setFinalTranscript(e.target.value)
-
-
-}
+import { connect } from "react-redux";
+const TranscriptTextArea = ({ finalTranscript, setFinalTranscript}) => {
+  const textAreaOnChange = (e) => {
+    setFinalTranscript(e.target.value);
+  };
 
   return (
     <div className="transcript-container">
@@ -24,9 +11,16 @@ const textAreaOnChange = (e) => {
         className="transcript-text"
         value={finalTranscript}
         onChange={textAreaOnChange}
-      ></textarea>
+      />
     </div>
   );
 };
 
-export default TranscriptTextArea;
+// Подключение состояния Redux к свойствам компонента
+const mapStateToProps = (state) => {
+  return {
+    rules: state.transcript.rules,
+  };
+};
+
+export default connect(mapStateToProps)(TranscriptTextArea);
