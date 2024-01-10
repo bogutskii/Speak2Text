@@ -1,7 +1,15 @@
 import React from "react";
+import { connect } from "react-redux";
 
-function Toast({ message }) {
-  return <div className="toast">{message}</div>;
+function Toast({ message, copiedToClipboard }) {
+  if (!copiedToClipboard) {
+    return null;
+  }
+  return <div className="toast" >{message}</div>;
 }
 
-export default Toast;
+const mapStateToProps = (state) => ({
+  copiedToClipboard: state.transcript.copiedToClipboard
+});
+
+export default connect(mapStateToProps)(Toast);

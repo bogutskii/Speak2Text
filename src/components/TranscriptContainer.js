@@ -16,7 +16,6 @@ const TranscriptTextArea = ({ finalTranscript, setFinalTranscript}) => {
   );
 };
 
-// Подключение состояния Redux к свойствам компонента
 const mapStateToProps = (state) => {
   return {
     rules: state.transcript.rules,

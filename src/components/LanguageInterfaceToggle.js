@@ -1,22 +1,39 @@
 import React from "react";
+import { connect } from "react-redux";
+import  {setInterfaceLanguage,loadLanguageFile}  from "../actions/transcriptActions";
 
-const LanguageInterfaceToggle = ({ onLanguageChange, language }) => {
+const LanguageInterfaceToggle = ({ currentInterfaceLanguage, setInterfaceLanguage, loadLanguageFile }) => {
+  const handleInterfaceChange = (selectedValue) => {
+    setInterfaceLanguage(selectedValue);
+    loadLanguageFile(selectedValue);
+  }
+
   return (
     <div className="language-toggle">
       <button
-        className={`glow-button ${language === "en" ? "lang" : "empty"}`}
-        onClick={() => onLanguageChange("en")}
+        className={`glow-button ${currentInterfaceLanguage === "en" ? "lang" : "empty"}`}
+        onClick={() => handleInterfaceChange("en")}
       >
         Eng
       </button>
       <button
-        className={`glow-button ${language === "ru" ? "lang" : "empty"}`}
-        onClick={() => onLanguageChange("ru")}
+        className={`glow-button ${currentInterfaceLanguage === "ru" ? "lang" : "empty"}`}
+        onClick={() => handleInterfaceChange("ru")}
       >
         Рус
       </button>
     </div>
   );
 };
+const mapStateToProps = (state) => ({
+  currentInterfaceLanguage: state.transcript.currentInterfaceLanguage,
+  interfaceLanguage: state.transcript.interfaceLanguage
 
-export default LanguageInterfaceToggle;
+});
+
+const mapDispatchToProps = {
+  setInterfaceLanguage,
+  loadLanguageFile
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LanguageInterfaceToggle);
