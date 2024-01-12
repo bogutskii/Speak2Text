@@ -5,7 +5,8 @@ import  { setRecognitionLanguage}  from "../actions/transcriptActions";
 const LanguageRecognitionSelector = ({
   recognitionLanguage,
   interfaceLanguage,
-  currentRecognitionLanguage
+  currentRecognitionLanguage,
+  setRecognitionLanguage
 }) => {
   
   const handleLanguageChange = (selectedValue) => {    

@@ -18,12 +18,7 @@ export const setMicrophoneError = (error) => ({
   payload: error
 });
 
-export const toggleRule = (ruleName) => {
-  return {
-    type: 'TOGGLE_RULE',
-    payload: ruleName
-  };
-};
+
 
 export const setInterfaceLanguage = (language) => ({
   type: 'SET_INTERFACE_LANGUAGE',

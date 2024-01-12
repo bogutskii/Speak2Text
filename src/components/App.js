@@ -28,9 +28,9 @@ function App({ interfaceLanguage, microphoneError }) {
       </div>
       <ButtonContainer />
       <SpeechRecognitionComponent />
-      
+
       <MicrophoneError />
-      <Toast message={interfaceLanguage.text_copied_toast} />
+      <Toast/>
       <RulesComponent />
     </div>
   );

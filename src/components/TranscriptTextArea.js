@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { updateFinalTranscript } from "../actions/transcriptActions";
 
 const TranscriptTextArea = ({ finalTranscript, updateFinalTranscript }) => {
-  console.log(finalTranscript);
   const textAreaOnChange = (e) => {
     updateFinalTranscript(e.target.value);
   };

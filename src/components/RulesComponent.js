@@ -1,22 +1,27 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { toggleRule } from '../actions/transcriptActions';
+import React from "react";
+import { connect } from "react-redux";
+import { toggleRule } from "../actions/rulesControlActions";
 
-const RulesComponent = ({ rules, toggleRule }) => {
+const RulesComponent = ({ rules, currentRecognitionLanguage, toggleRule }) => {
+  const handleToggle = (language, ruleName) => {
+    toggleRule(language, ruleName);
+  };
   return (
-    <div className='options-main'>
+    <div className="options-main">
       <h2>Options</h2>
-      <div className='options-list'>
-        {rules.map(rule => (
-          <div key={rule.name} className='option-item'>
-            <label className='option-label'>
+      <div className="options-list">
+        {rules[currentRecognitionLanguage].map((rule) => (
+          <div key={rule.name} className="option-item">
+            <label className="option-label">
               <input
                 type="checkbox"
                 checked={rule.active}
-                onChange={() => toggleRule(rule.name)}
-                className='option-checkbox'
+                onChange={() =>
+                  handleToggle(currentRecognitionLanguage, rule.name)
+                }
+                className="option-checkbox"
               />
-              {rule.name}
+              {rule.name} {rule.symbol}
             </label>
           </div>
         ))}
@@ -26,7 +31,8 @@ const RulesComponent = ({ rules, toggleRule }) => {
 };
 
 const mapStateToProps = (state) => ({
-  rules: state.transcript.rules,
+  rules: state.rulesControl,
+  currentRecognitionLanguage: state.transcript.currentRecognitionLanguage,
 });
 
 const mapDispatchToProps = {

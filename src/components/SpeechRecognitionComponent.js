@@ -18,25 +18,30 @@ function SpeechRecognitionComponent({
   setMicrophoneError,
   isListening,
   interimTranscript,
-  finalTranscript
+  finalTranscript,
+  currentRecognitionLanguage,
 }) {
   const handleResult = useCallback(
     (event) => {
-      let interimTranscriptValue = "";
       for (let i = event.resultIndex; i < event.results.length; ++i) {
         const transcript = event.results[i][0].transcript;
+        updateInterimTranscript(transcript);
+
         if (event.results[i].isFinal) {
-          updateInterimTranscript(transcript);
-          updateFinalTranscript(finalTranscript +interimTranscriptValue + transcript + " ");
-          interimTranscriptValue = ""; 
-          setMicrophoneError(false)
-        } else {
-          
-          interimTranscriptValue += transcript;
+          updateFinalTranscript(finalTranscript + transcript + " ");
+          setMicrophoneError(false);
+          setTimeout(() => {
+            updateInterimTranscript("");
+          }, 1000);
         }
       }
     },
-    [updateFinalTranscript, updateInterimTranscript, finalTranscript, setMicrophoneError]
+    [
+      updateFinalTranscript,
+      updateInterimTranscript,
+      finalTranscript,
+      setMicrophoneError,
+    ]
   );
 
   const handleEnd = useCallback(() => {
@@ -64,17 +69,29 @@ function SpeechRecognitionComponent({
   }, [handleResult, handleEnd, handleError]);
 
   useEffect(() => {
+    const startRecognition = () => {
+      try {
+        recognition.start();
+      } 
+      catch (error) {
+        // console.log("Ошибка при запуске распознавания речи:");
+      }
+    };
     if (isListening) {
-      recognition.start();
+      if (recognition && recognition.abort) {
+        recognition.abort(); // Останавливаем распознавание
+      }
+      recognition.lang = currentRecognitionLanguage;
+      startRecognition();
     } else {
       recognition.stop();
     }
-  }, [isListening]);
+  }, [isListening, currentRecognitionLanguage]);
 
   return (
     <div>
       <TranscriptTextArea />
-      <div className="interim-transcript">{interimTranscript}</div>
+      {/* <div className="interim-transcript">{interimTranscript}</div> */}
     </div>
   );
 }
@@ -84,6 +101,7 @@ const mapStateToProps = (state) => ({
   microphoneError: state.transcript.microphoneError,
   interimTranscript: state.transcript.interimTranscript,
   finalTranscript: state.transcript.finalTranscript,
+  currentRecognitionLanguage: state.transcript.currentRecognitionLanguage,
 });
 
 const mapDispatchToProps = {
