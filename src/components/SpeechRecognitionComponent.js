@@ -1,38 +1,43 @@
-import React, { useEffect, useCallback } from 'react';
-import { connect } from 'react-redux';
-import TranscriptTextArea from "./TranscriptContainer";
+import React, { useEffect, useCallback } from "react";
+import { connect } from "react-redux";
+import TranscriptTextArea from "./TranscriptTextArea";
 
 import {
   updateFinalTranscript,
   updateInterimTranscript,
-  toggleListening,
-  setMicrophoneError
-} from '../actions/transcriptActions';
+  setMicrophoneError,
+} from "../actions/transcriptActions";
 
-const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+const SpeechRecognition =
+  window.SpeechRecognition || window.webkitSpeechRecognition;
 const recognition = new SpeechRecognition();
 
-function SpeechRecognitionComponent({ 
-  updateFinalTranscript, 
-  updateInterimTranscript, 
-  toggleListening, 
-  setMicrophoneError, 
-  isListening, 
-  microphoneError 
+function SpeechRecognitionComponent({
+  updateFinalTranscript,
+  updateInterimTranscript,
+  setMicrophoneError,
+  isListening,
+  interimTranscript,
+  finalTranscript
 }) {
-  const handleResult = useCallback((event) => {
-    console.log("🚀 ~ file: SpeechRecognitionComponent.js:24 ~ handleResult ~ event:", event)
-    let interimTranscriptValue = '';
-    for (let i = event.resultIndex; i < event.results.length; ++i) {
-      const transcript = event.results[i][0].transcript;
-      if (event.results[i].isFinal) {
-        updateFinalTranscript(transcript);
-      } else {
-        interimTranscriptValue += transcript;
+  const handleResult = useCallback(
+    (event) => {
+      let interimTranscriptValue = "";
+      for (let i = event.resultIndex; i < event.results.length; ++i) {
+        const transcript = event.results[i][0].transcript;
+        if (event.results[i].isFinal) {
+          updateInterimTranscript(transcript);
+          updateFinalTranscript(finalTranscript +interimTranscriptValue + transcript + " ");
+          interimTranscriptValue = ""; 
+          setMicrophoneError(false)
+        } else {
+          
+          interimTranscriptValue += transcript;
+        }
       }
-    }
-    updateInterimTranscript(interimTranscriptValue);
-  }, [updateFinalTranscript, updateInterimTranscript]);
+    },
+    [updateFinalTranscript, updateInterimTranscript, finalTranscript, setMicrophoneError]
+  );
 
   const handleEnd = useCallback(() => {
     if (isListening) {
@@ -68,22 +73,26 @@ function SpeechRecognitionComponent({
 
   return (
     <div>
-      {microphoneError && <div>Ошибка микрофона</div>}
       <TranscriptTextArea />
+      <div className="interim-transcript">{interimTranscript}</div>
     </div>
   );
 }
 
 const mapStateToProps = (state) => ({
   isListening: state.transcript.isListening,
-  microphoneError: state.transcript.microphoneError
+  microphoneError: state.transcript.microphoneError,
+  interimTranscript: state.transcript.interimTranscript,
+  finalTranscript: state.transcript.finalTranscript,
 });
 
 const mapDispatchToProps = {
   updateFinalTranscript,
   updateInterimTranscript,
-  toggleListening,
-  setMicrophoneError
+  setMicrophoneError,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SpeechRecognitionComponent);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SpeechRecognitionComponent);

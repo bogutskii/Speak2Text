@@ -5,11 +5,10 @@ import  { setRecognitionLanguage}  from "../actions/transcriptActions";
 const LanguageRecognitionSelector = ({
   recognitionLanguage,
   interfaceLanguage,
+  currentRecognitionLanguage
 }) => {
-
-  const handleLanguageChange = (selectedValue) => {
-    console.log("selectedValue:", selectedValue)
-    
+  
+  const handleLanguageChange = (selectedValue) => {    
     setRecognitionLanguage(selectedValue);
   };
 
@@ -19,7 +18,7 @@ const LanguageRecognitionSelector = ({
       <select
         id="recognition-language-select"
         onChange={(e) => handleLanguageChange(e.target.value)}
-        value={recognitionLanguage}
+        value={recognitionLanguage[currentRecognitionLanguage]}
       >
         {recognitionLanguage.map((lang) => (
           <option key={lang.code} value={lang.code}>
@@ -33,8 +32,8 @@ const LanguageRecognitionSelector = ({
 
 const mapStateToProps = (state) => ({
   recognitionLanguage: state.transcript.recognitionLanguage,
-  interfaceLanguage: state.transcript.interfaceLanguage
-
+  interfaceLanguage: state.transcript.interfaceLanguage,
+  currentRecognitionLanguage: state.transcript.currentRecognitionLanguage
 });
 
 const mapDispatchToProps = {

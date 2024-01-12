@@ -1,9 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-// import  {interfaceLanguage, recognitionLanguage}  from "../actions/transcriptActions";
 
 const MicrophoneError = ({ interfaceLanguage, microphoneError }) => {
-if(microphoneError) return null
+if(!microphoneError) return null
 
 return (
   <div className="microphone-error">
@@ -17,9 +16,7 @@ const mapStateToProps = (state) => ({
   interfaceLanguage: state.transcript.interfaceLanguage
 });
 
-const mapDispatchToProps = {
 
-};
 
-export default connect(mapStateToProps, mapDispatchToProps)(MicrophoneError);
+export default connect(mapStateToProps)(MicrophoneError);
 

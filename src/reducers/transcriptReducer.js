@@ -71,17 +71,16 @@ const transcriptReducer = (state = initialState, action) => {
     case 'SET_COPIED_TO_CLIPBOARD':
       return { ...state, copiedToClipboard: action.payload };
     case 'SET_INTERFACE_LANGUAGE':
-        console.log('action:', {...action.payload});
-        return { ...state, interfaceLanguage: {...action.payload} };
+      return { ...state, interfaceLanguage: action.payload };
     case "SET_CURRENT_INTERFACE_LANGUAGE":
-          return { ...state, currentInterfaceLanguage: action.payload };
+      return { ...state, currentInterfaceLanguage: action.payload };
     case 'RESET_TRANSCRIPT':
       return {
         ...state,
         finalTranscript: '',
         interimTranscript: '',
         isListening: false,
-      }
+      };
     default:
       return state;
   }

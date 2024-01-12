@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { toggleListening, resetTranscript ,setCopiedToClipboard} from '../actions/transcriptActions';
-// import { useState } from 'react';
 
 const ButtonContainer = ({
   isListening,
