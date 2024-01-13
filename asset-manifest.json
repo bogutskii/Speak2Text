@@ -1,15 +1,16 @@
 {
   "files": {
-    "main.css": "/speak2text/static/css/main.d4561c5e.css",
-    "main.js": "/speak2text/static/js/main.6f790120.js",
-    "static/js/690.0ea80d62.chunk.js": "/speak2text/static/js/690.0ea80d62.chunk.js",
-    "static/js/54.08c388bb.chunk.js": "/speak2text/static/js/54.08c388bb.chunk.js",
+    "main.css": "/speak2text/static/css/main.8dbae073.css",
+    "main.js": "/speak2text/static/js/main.6aeb851b.js",
+    "static/js/690.146b15d4.chunk.js": "/speak2text/static/js/690.146b15d4.chunk.js",
+    "static/js/54.ed9f5cd9.chunk.js": "/speak2text/static/js/54.ed9f5cd9.chunk.js",
+    "static/js/938.bd0287ef.chunk.js": "/speak2text/static/js/938.bd0287ef.chunk.js",
     "index.html": "/speak2text/index.html",
-    "main.d4561c5e.css.map": "/speak2text/static/css/main.d4561c5e.css.map",
-    "main.6f790120.js.map": "/speak2text/static/js/main.6f790120.js.map"
+    "main.8dbae073.css.map": "/speak2text/static/css/main.8dbae073.css.map",
+    "main.6aeb851b.js.map": "/speak2text/static/js/main.6aeb851b.js.map"
   },
   "entrypoints": [
-    "static/css/main.d4561c5e.css",
-    "static/js/main.6f790120.js"
+    "static/css/main.8dbae073.css",
+    "static/js/main.6aeb851b.js"
   ]
 }
