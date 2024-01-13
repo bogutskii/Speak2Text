@@ -4,15 +4,16 @@ const initialState = {
   copiedToClipboard: false,
   isListening: false,
   microphoneError: false,
-  currentRecognitionLanguage: "en",
+  currentRecognitionLanguage: "ru-RU",
   recognitionLanguage: [
+    { code: "ru-RU", name: "Russian" },
     { code: "en", name: "English" },
+    { code: "uk-UA", name: "Ukrainian" },
     { code: "es", name: "Spanish" },
     { code: "fr", name: "French" },
     { code: "de", name: "German" },
     { code: "it", name: "Italian" },
     { code: "pt", name: "Portuguese" },
-    { code: "ru-RU", name: "Russian" },
     { code: "zh-CN", name: "Chinese (Simplified)" },
     { code: "ja", name: "Japanese" },
     { code: "ko", name: "Korean" },
@@ -24,9 +25,12 @@ const initialState = {
     stop_button_text: "Stop",
     reset_button_text: "Reset",
     copy_button_text: "Copy",
-    microphone_error_text: "Microphone error",
+    microphone_error_text: "Microphone is unavailable. Please check your microphone settings.",
     text_copied_toast: "Text copied to clipboard",
     labelRecognition: "Recognition language",
+    button_select_all: "Select all",
+    button_unselect_all: "Unselect all",
+    rules_title: "Options",
     languages: [
       { code: "en", name: "English" },
       { code: "es", name: "Spanish" },
@@ -68,6 +72,7 @@ const transcriptReducer = (state = initialState, action) => {
         finalTranscript: "",
         interimTranscript: "",
         isListening: false,
+        microphoneError: false,
       };
     default:
       return state;

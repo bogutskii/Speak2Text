@@ -1,9 +1,10 @@
-export const toggleRule = (language, ruleName) => {
+export const toggleRule = (language, ruleName, params=null) => {
     return {
       type: 'TOGGLE_RULE',
       payload: {
-        language:language,
-        ruleName:ruleName
+        language,
+        ruleName,
+        params
       }
     };
   };

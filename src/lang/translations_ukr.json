@@ -1,0 +1,26 @@
+{
+  "app_title": "Розпізнавання мови",
+  "start_button_text": "Почати",
+  "stop_button_text": "Стоп",
+  "reset_button_text": "Скинути",
+  "copy_button_text": "Копіювати текст",
+  "microphone_error_text": "Мікрофон недоступний. Будь ласка, перевірте налаштування мікрофона.",
+  "text_copied_toast": "Текст скопійовано до буфера обміну",
+  "labelRecognition": "Мова розпізнавання мови",
+  "languages": [
+    { "code": "en", "name": "Англійська" },
+    { "code": "uk-UA", "name": "Українська" },
+    { "code": "ru-RU", "name": "Російська" },
+    { "code": "es", "name": "Іспанська" },
+    { "code": "fr", "name": "Французька" },
+    { "code": "de", "name": "Німецька" },
+    { "code": "it", "name": "Італійська" },
+    { "code": "pt", "name": "Португальська" },
+    { "code": "zh-CN", "name": "Китайська (спрощена)" },
+    { "code": "ja", "name": "Японська" },
+    { "code": "ko", "name": "Корейська" }
+  ],
+  "button_select_all": "Вибрати все",
+  "button_unselect_all": "Зняти вибір зі всіх",
+  "rules_title": "Параметри"
+}

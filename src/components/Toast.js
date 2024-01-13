@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-function Toast({ interfaceLanguage, copiedToClipboard }) {
+function Toast({ interfaceLanguage, copiedToClipboard }) {  
   if (!copiedToClipboard) {
     return null;
   }

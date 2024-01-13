@@ -1,7 +1,6 @@
 import React, { useEffect, useCallback } from "react";
 import { connect } from "react-redux";
 import TranscriptTextArea from "./TranscriptTextArea";
-
 import {
   updateFinalTranscript,
   updateInterimTranscript,
@@ -20,27 +19,43 @@ function SpeechRecognitionComponent({
   interimTranscript,
   finalTranscript,
   currentRecognitionLanguage,
+  rules
 }) {
+
+  
   const handleResult = useCallback(
     (event) => {
+
+      const filterByRule = (text) => {
+        rules[currentRecognitionLanguage].forEach(rule => {
+          if (rule.active) {
+            const regex = new RegExp(`(^|(?<=\\s))${rule.name}(?=(\\s|\\.|\\;|$))`, "gi");
+            text = text.replace(regex, rule.symbol);
+          }
+        });
+        return text;
+      };
+
+
       for (let i = event.resultIndex; i < event.results.length; ++i) {
         const transcript = event.results[i][0].transcript;
-        updateInterimTranscript(transcript);
+        // updateInterimTranscript(transcript);
 
         if (event.results[i].isFinal) {
-          updateFinalTranscript(finalTranscript + transcript + " ");
+          updateFinalTranscript(finalTranscript + filterByRule(transcript) + " ");
           setMicrophoneError(false);
           setTimeout(() => {
-            updateInterimTranscript("");
+          // updateInterimTranscript("");
           }, 1000);
         }
       }
     },
     [
       updateFinalTranscript,
-      updateInterimTranscript,
       finalTranscript,
       setMicrophoneError,
+      currentRecognitionLanguage,
+      rules
     ]
   );
 
@@ -102,6 +117,7 @@ const mapStateToProps = (state) => ({
   interimTranscript: state.transcript.interimTranscript,
   finalTranscript: state.transcript.finalTranscript,
   currentRecognitionLanguage: state.transcript.currentRecognitionLanguage,
+  rules: state.rulesControl,
 });
 
 const mapDispatchToProps = {

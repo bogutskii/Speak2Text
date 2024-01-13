@@ -8,13 +8,16 @@ import {
 
 const LanguageInterfaceToggle = ({
   currentInterfaceLanguage,
+  setInterfaceLanguage,
   loadLanguageFile,
+  setCurrentInterface,
 }) => {
   const handleInterfaceChange = (selectedValue) => {
     setInterfaceLanguage(selectedValue);
     loadLanguageFile(selectedValue);
     setCurrentInterface(selectedValue);
   };
+
 
   return (
     <div className="language-toggle">
@@ -28,11 +31,19 @@ const LanguageInterfaceToggle = ({
       </button>
       <button
         className={`glow-button ${
+          currentInterfaceLanguage === "ukr" ? "ukraine" : "empty"
+        }`}
+        onClick={() => handleInterfaceChange("ukr")}
+      >
+        Ukr
+      </button>
+      <button
+        className={`glow-button ${
           currentInterfaceLanguage === "ru" ? "lang" : "empty"
         }`}
         onClick={() => handleInterfaceChange("ru")}
       >
-        Рус
+        Rus
       </button>
     </div>
   );

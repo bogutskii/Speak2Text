@@ -13,6 +13,8 @@ const LanguageRecognitionSelector = ({
     setRecognitionLanguage(selectedValue);
   };
 
+
+  
   return (
     <div className="language-selector">
       <label htmlFor="recognition-language-select">{interfaceLanguage.labelRecognition}: </label>

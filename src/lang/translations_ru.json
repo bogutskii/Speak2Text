@@ -9,14 +9,18 @@
   "labelRecognition": "Язык распознавание речи",
   "languages": [
     { "code": "en", "name": "Английский" },
+    { "code": "uk-UA", "name": "Украинский" },
+    { "code": "ru-RU", "name": "Русский" },
     { "code": "es", "name": "Испанский" },
     { "code": "fr", "name": "Французский" },
     { "code": "de", "name": "Немецкий" },
     { "code": "it", "name": "Итальянский" },
     { "code": "pt", "name": "Португальский" },
-    { "code": "ru-RU", "name": "Русский" },
     { "code": "zh-CN", "name": "Китайский (упрощенный)" },
     { "code": "ja", "name": "Японский" },
     { "code": "ko", "name": "Корейский" }
-  ]
+  ],
+  "button_select_all": "Выбрать все",
+  "button_unselect_all": "Снять выбор со всех",
+  "rules_title": "Параметры"
 }
