@@ -7,10 +7,17 @@ import LanguageInterfaceToggle from "./LanguageInterfaceToggle";
 import RulesComponent from "./RulesComponent";
 import LanguageRecognitionSelector from "./LanguageRecognitionSelector";
 import SpeechRecognitionComponent from "./SpeechRecognitionComponent"; // Импорт нового компонента
-
+import {ContactUs} from "./ContactUs";
+import logo from '../icons/logo.png';
 function App({ interfaceLanguage }) {
   return (
     <div className="app-container">
+      <div className="logo-container">
+        <div>
+          <img src={logo} alt="Logo" className="app-logo" />
+        </div>
+  
+      </div>
       <LanguageRecognitionSelector />
       <LanguageInterfaceToggle />
       <div className="title">{interfaceLanguage.app_title}</div>
@@ -18,6 +25,7 @@ function App({ interfaceLanguage }) {
       <SpeechRecognitionComponent />
       <Toast />
       <RulesComponent />
+      <ContactUs/>
     </div>
   );
 }

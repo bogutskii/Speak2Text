@@ -5,13 +5,25 @@ body {
 .app-container {
   background-color: #90a4ae;
   color: #000000;
-  padding: 20px;
+  padding: 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100vh;
   text-align: center;
+  border-radius: 10px;
+}
+.logo-container {
+  display: flex;
+  justify-content: flex-start; 
+  align-items: center;
+  padding: 10px;
+}
+
+.app-logo {
+  height: 150px; 
+  width: auto;
 }
 
 .title {
@@ -230,4 +242,56 @@ body {
   background-color: rgba(234, 232, 232, 0.5);
   padding: 5px;
   border-radius: 5px;
+}
+
+/* feedback form ContactUS */
+.contact-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: #f2f2f2;
+  margin: 20px;
+  border-radius: 10px;
+}
+
+.contact-form {
+  display: grid;
+  grid-template-columns: 1fr 6fr; 
+  gap: 20px; 
+  background: white;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  max-width: 800px;
+}
+
+.left-column, .right-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-input, .form-textarea {
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-textarea {
+  height: 150px; 
+  resize: none;
+}
+
+.form-submit {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+}
+
+.form-submit:hover {
+  background-color: #45a049;
 }
