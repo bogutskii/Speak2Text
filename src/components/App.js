@@ -18,9 +18,9 @@ function App({ interfaceLanguage }) {
         </div>
   
       </div>
-      <LanguageRecognitionSelector />
       <LanguageInterfaceToggle />
       <div className="title">{interfaceLanguage.app_title}</div>
+      <LanguageRecognitionSelector />
       <ButtonContainer />
       <SpeechRecognitionComponent />
       <Toast />

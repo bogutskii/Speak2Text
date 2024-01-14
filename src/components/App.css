@@ -16,7 +16,7 @@ body {
 }
 .logo-container {
   display: flex;
-  justify-content: flex-start; 
+  justify-content: space-between; /* Или 'flex-start' для логотипа слева */
   align-items: center;
   padding: 10px;
 }
@@ -25,7 +25,11 @@ body {
   height: 150px; 
   width: auto;
 }
-
+@media (max-width: 768px) {
+  .app-logo {
+    height: 40px;
+  }
+}
 .title {
   font-size: 36px;
   font-weight: 900;
@@ -58,8 +62,18 @@ body {
   cursor: pointer;
   position: relative;
   transition: background-color 0.5s ease-in-out;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+.glow-button:hover {
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+background-color: #ffffff;
 }
 
+.glow-button:active {
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+background-color: #ddd; 
+}
 .glow-button.start {
   background-color: #539b3b;
 }
@@ -283,15 +297,34 @@ body {
   resize: none;
 }
 
-.form-submit {
-  padding: 10px 20px;
+/* .form-submit {
+  padding: 10px 10px;
+  width: 40%;
   border: none;
   border-radius: 4px;
   background-color: #4CAF50;
   color: white;
   cursor: pointer;
-}
+} */
 
 .form-submit:hover {
   background-color: #45a049;
+}
+.message-sent {
+  position: relative;
+  top: 45%;
+  left: 50%;
+  width: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(87, 87, 87, 0.5);
+  color: #ffffff;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  z-index: 10; 
+  animation: fade-in-out 1s ease-in-out;
+}
+@keyframes fade-in-out {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
 }
