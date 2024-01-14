@@ -27,10 +27,13 @@ body {
 
 .button-container {
   display: flex;
+  justify-content: center;
   gap: 10px;
   margin-bottom: 20px;
 }
-
+.mb-0{
+  margin-bottom: 0px;
+}
 .glow-button {
   border: none;
   outline: none;
@@ -124,6 +127,8 @@ body {
 }
 
 .option-item {
+  display: flex;
+  justify-content: center;
   background-color: white;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -133,6 +138,7 @@ body {
 
 .option-label {
   display: flex;
+  flex-grow: 1; 
   align-items: center;
   gap: 10px;
 }
@@ -140,6 +146,24 @@ body {
 .option-checkbox {
   accent-color: #007bff;
   cursor: pointer;
+  margin: 0;
+}
+
+.option-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.option-name {
+  margin-bottom: 5px; 
+}
+
+.option-symbol {
+  font-weight: bold;
+  font-size: 20px; 
+  color: #007bff; 
 }
 
 .toast {
@@ -178,7 +202,7 @@ body {
 
 .language-selector label {
   margin-right: 10px;
-  font-weight: bold;
+  font-size: 20px;
   color: #333;
 }
 
