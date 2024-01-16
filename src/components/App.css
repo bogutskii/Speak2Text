@@ -1,7 +1,3 @@
-body {
-  overflow: hidden;
-}
-
 .app-container {
   background-color: #90a4ae;
   color: #000000;
@@ -10,13 +6,19 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
   text-align: center;
   border-radius: 10px;
 }
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
 .logo-container {
   display: flex;
-  justify-content: space-between; /* Или 'flex-start' для логотипа слева */
+  justify-content: space-between;
   align-items: center;
   padding: 10px;
 }
@@ -41,6 +43,22 @@ body {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
+.header .menu {
+  display: flex;
+  gap: 20px;
+}
+
+.header .menu a {
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.header .menu a:hover {
+  text-decoration: underline;
+}
+
+
 .button-container {
   display: flex;
   justify-content: center;
@@ -50,6 +68,7 @@ body {
 .mb-0{
   margin-bottom: 0px;
 }
+
 .glow-button {
   border: none;
   outline: none;
@@ -113,7 +132,7 @@ background-color: #ddd;
 .glow-button.ukraine{
   background-image: linear-gradient(to bottom, rgb(0, 60, 255), rgb(255, 251, 0));
 }
-  
+
 .transcript-text {
   width: 80vw;
   height: 40vh;
@@ -249,7 +268,7 @@ background-color: #ddd;
 }
 .microphone-error{
   position: absolute; 
-  top: 10px;
+  top: -35px;
   right: 10px;
   border: 2px solid rgba(255, 83, 83, 0.8); 
   color: rgb(0, 0, 0); 
@@ -327,4 +346,8 @@ background-color: #ddd;
 @keyframes fade-in-out {
   0% { opacity: 1; }
   100% { opacity: 0; }
+}
+
+.invalid {
+  border: 2px solid red; 
 }

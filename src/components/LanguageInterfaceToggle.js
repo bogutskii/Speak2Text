@@ -18,7 +18,6 @@ const LanguageInterfaceToggle = ({
     setCurrentInterface(selectedValue);
   };
 
-
   return (
     <div className="language-toggle">
       <button

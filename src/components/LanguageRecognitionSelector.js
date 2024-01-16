@@ -1,23 +1,22 @@
 import React from "react";
 import { connect } from "react-redux";
-import  { setRecognitionLanguage}  from "../actions/transcriptActions";
+import { setRecognitionLanguage } from "../actions/transcriptActions";
 
 const LanguageRecognitionSelector = ({
   recognitionLanguage,
   interfaceLanguage,
   currentRecognitionLanguage,
-  setRecognitionLanguage
+  setRecognitionLanguage,
 }) => {
-  
-  const handleLanguageChange = (selectedValue) => {    
+  const handleLanguageChange = (selectedValue) => {
     setRecognitionLanguage(selectedValue);
   };
 
-
-  
   return (
     <div className="language-selector">
-      <label htmlFor="recognition-language-select">{interfaceLanguage.labelRecognition}: </label>
+      <label htmlFor="recognition-language-select">
+        {interfaceLanguage.labelRecognition}:{" "}
+      </label>
       <select
         id="recognition-language-select"
         onChange={(e) => handleLanguageChange(e.target.value)}
@@ -36,11 +35,14 @@ const LanguageRecognitionSelector = ({
 const mapStateToProps = (state) => ({
   recognitionLanguage: state.transcript.recognitionLanguage,
   interfaceLanguage: state.transcript.interfaceLanguage,
-  currentRecognitionLanguage: state.transcript.currentRecognitionLanguage
+  currentRecognitionLanguage: state.transcript.currentRecognitionLanguage,
 });
 
 const mapDispatchToProps = {
-  setRecognitionLanguage
+  setRecognitionLanguage,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LanguageRecognitionSelector);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LanguageRecognitionSelector);
