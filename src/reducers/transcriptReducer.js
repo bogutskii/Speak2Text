@@ -25,7 +25,8 @@ const initialState = {
     stop_button_text: "Stop",
     reset_button_text: "Reset",
     copy_button_text: "Copy",
-    microphone_error_text: "Microphone is unavailable. Please check your microphone settings.",
+    microphone_error_text:
+      "Microphone is unavailable. Please check your microphone settings.",
     text_copied_toast: "Text copied to clipboard",
     labelRecognition: "Recognition language",
     button_select_all: "Select all",

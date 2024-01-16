@@ -19,34 +19,35 @@ function SpeechRecognitionComponent({
   interimTranscript,
   finalTranscript,
   currentRecognitionLanguage,
-  rules
+  rules,
 }) {
-
-  
   const handleResult = useCallback(
     (event) => {
-
       const filterByRule = (text) => {
-        rules[currentRecognitionLanguage].forEach(rule => {
+        rules[currentRecognitionLanguage].forEach((rule) => {
           if (rule.active) {
-            const regex = new RegExp(`(^|(?<=\\s))${rule.name}(?=(\\s|\\.|\\;|$))`, "gi");
+            const regex = new RegExp(
+              `(^|(?<=\\s))${rule.name}(?=(\\s|\\.|\\;|$))`,
+              "gi"
+            );
             text = text.replace(regex, rule.symbol);
           }
         });
         return text;
       };
 
-
       for (let i = event.resultIndex; i < event.results.length; ++i) {
         const transcript = event.results[i][0].transcript;
         // updateInterimTranscript(transcript);
 
         if (event.results[i].isFinal) {
-          updateFinalTranscript(finalTranscript + filterByRule(transcript) + " ");
+          updateFinalTranscript(
+            finalTranscript + filterByRule(transcript) + " "
+          );
           setMicrophoneError(false);
-          setTimeout(() => {
-          // updateInterimTranscript("");
-          }, 1000);
+          // setTimeout(() => {
+          //   updateInterimTranscript("");
+          // }, 1000);
         }
       }
     },
@@ -55,7 +56,7 @@ function SpeechRecognitionComponent({
       finalTranscript,
       setMicrophoneError,
       currentRecognitionLanguage,
-      rules
+      rules,
     ]
   );
 
@@ -87,14 +88,11 @@ function SpeechRecognitionComponent({
     const startRecognition = () => {
       try {
         recognition.start();
-      } 
-      catch (error) {
-        // console.log("Ошибка при запуске распознавания речи:");
-      }
+      } catch (error) {}
     };
     if (isListening) {
       if (recognition && recognition.abort) {
-        recognition.abort(); // Останавливаем распознавание
+        recognition.abort();
       }
       recognition.lang = currentRecognitionLanguage;
       startRecognition();
