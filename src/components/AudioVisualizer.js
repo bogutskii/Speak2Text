@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
+import MicrophoneError from "./MicrophoneError";
 const AudioVisualizer = ({ isListening }) => {
   const [volume, setVolume] = useState(0);
   let audioContext;
@@ -36,11 +37,18 @@ const AudioVisualizer = ({ isListening }) => {
     analyser.getByteFrequencyData(dataArray);
     let sum = dataArray.reduce((a, b) => a + b, 0);
     let average = sum / dataArray.length;
-    setVolume(average / 100.0);
+    setVolume(average / 80.0);
   };
 
-  const barHeight = Math.min(volume * 200, 200);
-  const barColor = `rgb(0, ${volume * 255}, ${255 - volume * 255})`;
+  const calculateColor = (volume) => {
+    if (volume > 0.7) {
+      return "rgb(255, 0, 0)"; 
+    }
+    return `rgb(${volume * 255}, ${255 - volume * 255}, 0)`;
+  };
+
+  const barColor = isListening ? calculateColor(volume) : "white"; 
+  const barHeight = isListening ? Math.min(volume * 200, 200) : 0; 
 
   return (
     <div
@@ -60,6 +68,7 @@ const AudioVisualizer = ({ isListening }) => {
           bottom: 0,
         }}
       />
+       <MicrophoneError volume={volume}/>
     </div>
   );
 };

@@ -8,7 +8,7 @@ const TranscriptTextArea = ({ finalTranscript, updateFinalTranscript }) => {
   };
   return (
     <div className="transcript-container">
-      <MicrophoneError />
+     
       <textarea
         className="transcript-text"
         value={finalTranscript}
