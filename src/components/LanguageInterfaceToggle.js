@@ -21,7 +21,7 @@ const LanguageInterfaceToggle = ({
   return (
     <div className="language-toggle">
       <button
-        className={`glow-button ${
+        className={`glow-button sm ${
           currentInterfaceLanguage === "en" ? "lang" : "empty"
         }`}
         onClick={() => handleInterfaceChange("en")}
@@ -29,7 +29,7 @@ const LanguageInterfaceToggle = ({
         Eng
       </button>
       <button
-        className={`glow-button ${
+        className={`glow-button sm ${
           currentInterfaceLanguage === "ukr" ? "ukraine" : "empty"
         }`}
         onClick={() => handleInterfaceChange("ukr")}
@@ -37,7 +37,7 @@ const LanguageInterfaceToggle = ({
         Ukr
       </button>
       <button
-        className={`glow-button ${
+        className={`glow-button sm ${
           currentInterfaceLanguage === "ru" ? "lang" : "empty"
         }`}
         onClick={() => handleInterfaceChange("ru")}
