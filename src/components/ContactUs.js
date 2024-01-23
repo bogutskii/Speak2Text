@@ -99,6 +99,7 @@ export const ContactUs = () => {
             className={`form-textarea ${!isMessageValid ? "invalid" : ""}`}
             value={userMessage}
             onChange={handleSetUserMessage}
+            placeholder = 'Your wishes, suggestions, or bug reports'
           ></textarea>
           {messageSent && <div className="message-sent">Message Sent!</div>}
           <input type="submit" value="Send" className="glow-button regular" />

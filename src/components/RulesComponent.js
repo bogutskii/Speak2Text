@@ -24,7 +24,9 @@ const RulesComponent = ({
   };
   return (
     <div className="options-main">
-      <h2>{interfaceLanguage.rules_title}</h2>
+
+      <div className="options-header">
+        {/* <h2>{interfaceLanguage.rules_title}</h2> */}
       <div className="button-container mb-0">
         <button className="glow-button regular" onClick={selectAllRules}>
           {interfaceLanguage.button_select_all}
@@ -32,6 +34,7 @@ const RulesComponent = ({
         <button className="glow-button regular" onClick={deselectAllRules}>
           {interfaceLanguage.button_unselect_all}
         </button>
+      </div>
       </div>
       <div className="options-list">
         {rules[currentRecognitionLanguage].map((rule) => (
@@ -53,6 +56,7 @@ const RulesComponent = ({
           </div>
         ))}
       </div>
+      <div className="option-item"> + </div>
     </div>
   );
 };
