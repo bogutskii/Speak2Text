@@ -43,8 +43,8 @@ const AudioVisualizer = ({ isListening }) => {
     return `rgb(${volume * 255}, ${255 - volume * 255}, 0)`; // Интерполяция цвета
   };
 
-  const barColor = isListening ? calculateColor(volume) : "white"; 
-  const barHeight = isListening ? Math.min(volume * 150, 200) : 0; 
+  const barColor = isListening ? calculateColor(volume) : "white";
+  const barHeight = isListening ? Math.min(volume * 150, 200) : 0;
 
   useEffect(() => {
     if (isListening) {
@@ -59,14 +59,14 @@ const AudioVisualizer = ({ isListening }) => {
         audioContext = null;
       }
       if (mediaStream) {
-        mediaStream.getTracks().forEach(track => track.stop());
+        mediaStream.getTracks().forEach((track) => track.stop());
       }
     }
     return () => {
       if (source) source.disconnect();
       if (audioContext) audioContext.close();
       if (mediaStream) {
-        mediaStream.getTracks().forEach(track => track.stop());
+        mediaStream.getTracks().forEach((track) => track.stop());
       }
     };
   }, [isListening]);
@@ -76,20 +76,20 @@ const AudioVisualizer = ({ isListening }) => {
       style={{
         width: "200px",
         height: "20px",
-        backgroundColor: `${isListening ? "rgb(206 217 230)": "#90a4ae"}`,
+        backgroundColor: `${isListening ? "rgb(206 217 230)" : "#90a4ae"}`,
         position: "relative",
       }}
     >
       <div
         style={{
           width: `${barHeight}px`,
-          height: '100%',
+          height: "100%",
           backgroundColor: barColor,
           position: "absolute",
           bottom: 0,
         }}
       />
-      <MicrophoneError volume={volume}/>
+      <MicrophoneError volume={volume} />
     </div>
   );
 };

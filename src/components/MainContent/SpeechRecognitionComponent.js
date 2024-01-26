@@ -5,7 +5,7 @@ import {
   updateFinalTranscript,
   updateInterimTranscript,
   setMicrophoneError,
-} from "../actions/transcriptActions";
+} from "../../actions/transcriptActions";
 
 const SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;

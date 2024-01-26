@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { setRecognitionLanguage } from "../actions/transcriptActions";
+import { setRecognitionLanguage } from "../../actions/transcriptActions";
 
 const LanguageRecognitionSelector = ({
   recognitionLanguage,
@@ -14,9 +14,6 @@ const LanguageRecognitionSelector = ({
 
   return (
     <div className="language-selector">
-      <label htmlFor="recognition-language-select">
-        {interfaceLanguage.labelRecognition}:{" "}
-      </label>
       <select
         id="recognition-language-select"
         onChange={(e) => handleLanguageChange(e.target.value)}

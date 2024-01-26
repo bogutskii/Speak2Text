@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { updateFinalTranscript } from "../actions/transcriptActions";
+import { updateFinalTranscript } from "../../actions/transcriptActions";
 const TranscriptTextArea = ({ finalTranscript, updateFinalTranscript }) => {
   const textAreaOnChange = (e) => {
     updateFinalTranscript(e.target.value);

@@ -3,7 +3,7 @@
   "start_button_text": "Почати",
   "stop_button_text": "Стоп",
   "reset_button_text": "Скинути",
-  "copy_button_text": "Копіювати текст",
+  "copy_button_text": "Копіювати",
   "microphone_error_text": "Мікрофон недоступний. Будь ласка, перевірте налаштування мікрофона.",
   "text_copied_toast": "Текст скопійовано до буфера обміну",
   "labelRecognition": "Мова розпізнавання мови",

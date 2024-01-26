@@ -4,8 +4,8 @@ import {
   toggleListening,
   resetTranscript,
   setCopiedToClipboard,
-} from "../actions/transcriptActions";
-import   LanguageRecognitionSelector  from "../components/LanguageRecognitionSelector";
+} from "../../actions/transcriptActions";
+import LanguageRecognitionSelector from "./LanguageRecognitionSelector";
 const ButtonContainer = ({
   isListening,
   resetTranscript,

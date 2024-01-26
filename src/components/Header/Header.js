@@ -1,17 +1,14 @@
 import React from "react";
-import LanguageInterfaceToggle from "./LanguageInterfaceToggle";
 import Title from "./Title";
-import Logo from "./Logo";
 import { connect } from "react-redux";
 import Menu from "./Menu";
 
-export const Header = ({ interfaceLanguage }) => {
+export const Header = () => {
   return (
     <header className="header">
-      <Logo />
-      <Title title={interfaceLanguage.app_title} />
-      <LanguageInterfaceToggle />
+      <Title />
       <Menu />
+    
     </header>
   );
 };
