@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { toggleRule } from "../actions/rulesControlActions";
+import { toggleRule } from "../../actions/rulesControlActions";
 
 const RulesComponent = ({
   rules,
@@ -24,14 +24,16 @@ const RulesComponent = ({
   };
   return (
     <div className="options-main">
-      <h2>{interfaceLanguage.rules_title}</h2>
-      <div className="button-container mb-0">
-        <button className="glow-button regular" onClick={selectAllRules}>
-          {interfaceLanguage.button_select_all}
-        </button>
-        <button className="glow-button regular" onClick={deselectAllRules}>
-          {interfaceLanguage.button_unselect_all}
-        </button>
+      <div className="options-header">
+        {/* <h2>{interfaceLanguage.rules_title}</h2> */}
+        <div className="button-container mb-0">
+          <button className="glow-button regular" onClick={selectAllRules}>
+            {interfaceLanguage.button_select_all}
+          </button>
+          <button className="glow-button regular" onClick={deselectAllRules}>
+            {interfaceLanguage.button_unselect_all}
+          </button>
+        </div>
       </div>
       <div className="options-list">
         {rules[currentRecognitionLanguage].map((rule) => (
@@ -45,14 +47,16 @@ const RulesComponent = ({
                 }
                 className="option-checkbox"
               />
+              </label>
               <div className="option-content">
-                <span className="option-name">{rule.name}</span>
+                <span className="option-name glow-button todo">{rule.name}</span>
                 <span className="option-symbol">{rule.symbol}</span>
               </div>
-            </label>
+            
           </div>
         ))}
       </div>
+      <div className="option-item"> + </div>
     </div>
   );
 };

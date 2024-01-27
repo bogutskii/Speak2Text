@@ -1,20 +1,16 @@
 import React from "react";
 import { connect } from "react-redux";
-import { updateFinalTranscript } from "../actions/transcriptActions";
-import MicrophoneError from "./MicrophoneError";
+import { updateFinalTranscript } from "../../actions/transcriptActions";
 const TranscriptTextArea = ({ finalTranscript, updateFinalTranscript }) => {
   const textAreaOnChange = (e) => {
     updateFinalTranscript(e.target.value);
   };
   return (
-    <div className="transcript-container">
-      <MicrophoneError />
       <textarea
         className="transcript-text"
         value={finalTranscript}
         onChange={textAreaOnChange}
       />
-    </div>
   );
 };
 

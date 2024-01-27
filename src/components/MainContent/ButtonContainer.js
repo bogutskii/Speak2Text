@@ -4,8 +4,8 @@ import {
   toggleListening,
   resetTranscript,
   setCopiedToClipboard,
-} from "../actions/transcriptActions";
-
+} from "../../actions/transcriptActions";
+import LanguageRecognitionSelector from "./LanguageRecognitionSelector";
 const ButtonContainer = ({
   isListening,
   resetTranscript,
@@ -42,6 +42,7 @@ const ButtonContainer = ({
       <button className="glow-button copy" onClick={copyToClipboard}>
         {interfaceLanguage.copy_button_text}
       </button>
+      <LanguageRecognitionSelector />
     </div>
   );
 };
