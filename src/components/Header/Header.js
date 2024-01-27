@@ -8,7 +8,6 @@ export const Header = () => {
     <header className="header">
       <Title />
       <Menu />
-    
     </header>
   );
 };

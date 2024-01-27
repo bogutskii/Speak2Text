@@ -6,13 +6,11 @@ const TranscriptTextArea = ({ finalTranscript, updateFinalTranscript }) => {
     updateFinalTranscript(e.target.value);
   };
   return (
-    <div className="transcript-container">
       <textarea
         className="transcript-text"
         value={finalTranscript}
         onChange={textAreaOnChange}
       />
-    </div>
   );
 };
 

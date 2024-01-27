@@ -17,7 +17,7 @@ export const Menu = () => {
   return (
     <div className="menu">
       <button className="button-30" onClick={() => openModal("contact")}>
-        contact
+        feedback
       </button>
       <button className="button-30" onClick={() => openModal("modal2")}>
         about
@@ -27,7 +27,7 @@ export const Menu = () => {
         className="button-30 black"
         href="https://www.buymeacoffee.com/bogutskii"
       >
-        buy me a coffee
+        coffee
       </a>
 
       <LanguageInterfaceToggle />

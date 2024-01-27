@@ -72,24 +72,26 @@ const AudioVisualizer = ({ isListening }) => {
   }, [isListening]);
 
   return (
-    <div
-      style={{
-        width: "200px",
-        height: "20px",
-        backgroundColor: `${isListening ? "rgb(206 217 230)" : "#90a4ae"}`,
-        position: "relative",
-      }}
-    >
+    <div className="audio-visualizer">
       <div
         style={{
-          width: `${barHeight}px`,
-          height: "100%",
-          backgroundColor: barColor,
-          position: "absolute",
-          bottom: 0,
+          width: "200px",
+          height: "20px",
+          backgroundColor: `${isListening ? "rgb(206 217 230)" : "#90a4ae"}`,
+          position: "relative",
         }}
-      />
-      <MicrophoneError volume={volume} />
+      >
+        <div
+          style={{
+            width: `${barHeight}px`,
+            height: "100%",
+            backgroundColor: barColor,
+            position: "absolute",
+            bottom: 0,
+          }}
+        />
+        <MicrophoneError volume={volume} />
+      </div>
     </div>
   );
 };

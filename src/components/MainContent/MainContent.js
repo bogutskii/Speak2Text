@@ -10,9 +10,11 @@ export const MainContent = () => {
     <div>
       <AudioVisualizer />
       <ButtonContainer />
-      <SpeechRecognitionComponent />
       <Toast />
+      <div className="recognition-container">
+      <SpeechRecognitionComponent />
       <RulesComponent />
+      </div>
     </div>
   );
 };

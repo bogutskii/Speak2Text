@@ -47,11 +47,12 @@ const RulesComponent = ({
                 }
                 className="option-checkbox"
               />
+              </label>
               <div className="option-content">
-                <span className="option-name">{rule.name}</span>
+                <span className="option-name glow-button todo">{rule.name}</span>
                 <span className="option-symbol">{rule.symbol}</span>
               </div>
-            </label>
+            
           </div>
         ))}
       </div>
