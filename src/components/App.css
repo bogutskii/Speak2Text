@@ -27,7 +27,7 @@ html, body {
 
 .app-logo {
   height: auto; 
-  width: 10vw;
+  width: 4vw;
 }
 
 .title {
@@ -40,7 +40,9 @@ html, body {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   margin-left: 5px;
 }
-
+.coffee{
+  font-size: 16px;
+}
 .button-container {
   display: flex;
   flex-wrap: wrap;
@@ -130,6 +132,10 @@ background-color: #ddd;
 }
 .todo{
   background-color: #53487ba1;
+  padding: 4px 6px;
+  font-weight: 100;
+  font-size: 14px;
+  border-radius: 5px;
 }
 .todo:hover{
   background-color: #927fd9a1;
@@ -234,7 +240,8 @@ background-color: #ddd;
   padding: 10px;
   border-radius: 5px;
   animation: fade-in-out 1s ease-in-out;
-  top:40vh
+  top:40vh;
+  left: 30vw;
 }
 
 @keyframes pulse-shadow {
@@ -366,7 +373,7 @@ background-color: #ddd;
 } */
 
 .form-label{
-  position: absolute;
+  /* position: absolute; */
   top: 1rem;
   left: 1rem;
   pointer-events: none;

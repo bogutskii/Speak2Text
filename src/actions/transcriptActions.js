@@ -18,8 +18,6 @@ export const setMicrophoneError = (error) => ({
   payload: error
 });
 
-
-
 export const setInterfaceLanguage = (language) => ({
   type: 'SET_INTERFACE_LANGUAGE',
   payload: language
@@ -43,6 +41,10 @@ export const setCopiedToClipboard = (value) => ({
   payload: value
 });
 
+export const setAutocorrector = (value) => ({
+  type: 'SET_AUTOCORRECTOR',
+  payload: value
+})
 export const loadLanguageFile = (language) => {
   return (dispatch) => {
     import(`../lang/translations_${language}.json`)

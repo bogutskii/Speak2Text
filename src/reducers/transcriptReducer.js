@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 const initialState = {
   finalTranscript: "",
   interimTranscript: "",
@@ -5,6 +6,7 @@ const initialState = {
   isListening: false,
   microphoneError: false,
   currentRecognitionLanguage: "ru-RU",
+  autocorrector: false,
   recognitionLanguage: [
     { code: "ru-RU", name: "Russian" },
     { code: "en", name: "English" },
@@ -50,7 +52,12 @@ const initialState = {
 const transcriptReducer = (state = initialState, action) => {
   switch (action.type) {
     case "UPDATE_FINAL_TRANSCRIPT":
-      return { ...state, finalTranscript: action.payload };
+      if(state.autocorrector){
+          const text = Autocorrector(action.payload);
+        return { ...state, finalTranscript: text };
+      } else{
+          return { ...state, finalTranscript: action.payload };
+      }
     case "UPDATE_INTERIM_TRANSCRIPT":
       return { ...state, interimTranscript: action.payload };
     case "SET_ERROR":
@@ -67,6 +74,8 @@ const transcriptReducer = (state = initialState, action) => {
       return { ...state, interfaceLanguage: action.payload };
     case "SET_CURRENT_INTERFACE_LANGUAGE":
       return { ...state, currentInterfaceLanguage: action.payload };
+    case "SET_AUTOCORRECTOR":
+      return { ...state, autocorrector: action.payload };
     case "RESET_TRANSCRIPT":
       return {
         ...state,
@@ -78,6 +87,24 @@ const transcriptReducer = (state = initialState, action) => {
     default:
       return state;
   }
+};
+
+
+
+const Autocorrector = (text) => {
+  let correctedText = text.replace(/\s{2,}/g, " ");
+  correctedText = correctedText.replace(/\s([.,!?;:{}()\[\]])/g, "$1");
+  correctedText = correctedText.replace(/([^\s])([\(\[{])/g, "$1 $2");
+  correctedText = correctedText.replace(/([^\s])(")/g, "$1 $2");
+  correctedText = correctedText.replace(/"\s*([^"]*?)\s*"/g, ' "$1" ');
+  correctedText = correctedText.replace(/([.,!?…\\}\])])([^\s])/g, "$1 $2");
+  correctedText = correctedText.replace(/\(\s/g, "(");
+  correctedText = correctedText.replace(/\{\s/g, "{");
+  correctedText = correctedText.replace(/\[\s/g, "[");
+  correctedText = correctedText.replace(/\s\)/g, ")");
+  correctedText = correctedText.replace(/\s\}/g, "}");
+  correctedText = correctedText.replace(/\s\]/g, "]");
+  return correctedText;
 };
 
 export default transcriptReducer;
