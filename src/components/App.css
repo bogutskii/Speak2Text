@@ -193,6 +193,19 @@ background-color: #ddd;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 10px;
   margin-top: 15px;
+  max-height: 60vh; 
+  overflow-y: auto; 
+}
+
+.options-list::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 7px;
+}
+
+.options-list::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: rgba(0,0,0,.5);
+  box-shadow: 0 0 1px rgba(255,255,255,.5);
 }
 
 .option-item {
@@ -324,8 +337,8 @@ background-color: #ddd;
   border-radius: 5px;
 }
 
-/* feedback form ContactUS */
-.contact-form-container {
+/* feedback form ContactUS 
+ .contact-form-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -362,23 +375,98 @@ background-color: #ddd;
 
 .form-input:focus {
   border: 1px solid #90a4ae;  
-}
+} 
 
-/* .form-input:is (:focus, :valid) ~ .form-label {
+.form-input:is (:focus, :valid) ~ .form-label {
   transform: 
     translateY(-120px) 
     scale(0.7);
   padding-inline: 0.3rem;
 
-} */
-
+}  
 .form-label{
-  /* position: absolute; */
+  position: absolute; 
   top: 1rem;
   left: 1rem;
   pointer-events: none;
   transition: 150ms cubic-bezier(0.4,0,0.2,1);
 }
+ */
+
+.contact-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: #f2f2f2;
+  margin: 20px;
+  border-radius: 10px;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: row;
+  gap: 10px; 
+  background: white;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  max-width: 800px;
+}
+
+.input-container {
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.form-input, .form-textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  transition: 150ms cubic-bezier(0.4,0,0.2,1);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-input:focus, .form-textarea:focus {
+  border: 1px solid #90a4ae;  
+}
+
+.form-label {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: 150ms cubic-bezier(0.4,0,0.2,1);
+  pointer-events: none;
+}
+.top-10 {
+  top:10%
+}
+.form-input:focus ~ .form-label, 
+.form-input:valid ~ .form-label,
+.form-textarea:focus ~ .form-label, 
+.form-textarea:valid ~ .form-label {
+  top: 0;
+  transform: translateY(-100%);
+  font-size: 0.8rem;
+  color: #90a4ae;
+}
+.left-column{
+  margin: 20px 0px 0px 10px;
+}
+.right-column{
+  margin: 20px 10px 0px 10px;
+  width: 30vw;
+}
+.mt-20{
+  margin-top: 20px;
+}
+
+
+
+
+
 
 .button-30 {
   align-items: center;

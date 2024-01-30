@@ -52,11 +52,11 @@ const initialState = {
 const transcriptReducer = (state = initialState, action) => {
   switch (action.type) {
     case "UPDATE_FINAL_TRANSCRIPT":
-      if(state.autocorrector){
-          const text = Autocorrector(action.payload);
+      if (state.autocorrector) {
+        const text = Autocorrector(action.payload);
         return { ...state, finalTranscript: text };
-      } else{
-          return { ...state, finalTranscript: action.payload };
+      } else {
+        return { ...state, finalTranscript: action.payload };
       }
     case "UPDATE_INTERIM_TRANSCRIPT":
       return { ...state, interimTranscript: action.payload };
@@ -76,6 +76,9 @@ const transcriptReducer = (state = initialState, action) => {
       return { ...state, currentInterfaceLanguage: action.payload };
     case "SET_AUTOCORRECTOR":
       return { ...state, autocorrector: action.payload };
+    case "USE_AUTOCORRECTOR":
+      const text = Autocorrector(state.finalTranscript);
+      return { ...state, finalTranscript: text };
     case "RESET_TRANSCRIPT":
       return {
         ...state,
@@ -89,21 +92,20 @@ const transcriptReducer = (state = initialState, action) => {
   }
 };
 
-
-
 const Autocorrector = (text) => {
-  let correctedText = text.replace(/\s{2,}/g, " ");
-  correctedText = correctedText.replace(/\s([.,!?;:{}()\[\]])/g, "$1");
-  correctedText = correctedText.replace(/([^\s])([\(\[{])/g, "$1 $2");
-  correctedText = correctedText.replace(/([^\s])(")/g, "$1 $2");
-  correctedText = correctedText.replace(/"\s*([^"]*?)\s*"/g, ' "$1" ');
-  correctedText = correctedText.replace(/([.,!?…\\}\])])([^\s])/g, "$1 $2");
-  correctedText = correctedText.replace(/\(\s/g, "(");
-  correctedText = correctedText.replace(/\{\s/g, "{");
-  correctedText = correctedText.replace(/\[\s/g, "[");
-  correctedText = correctedText.replace(/\s\)/g, ")");
-  correctedText = correctedText.replace(/\s\}/g, "}");
-  correctedText = correctedText.replace(/\s\]/g, "]");
+  let correctedText = text
+    .replace(/ {2,}/g, " ")
+    .replace(/\s([.,!?;:{}()\[\]])/g, "$1")
+    .replace(/([.,!?…\\}\])])(?=[A-Za-zА-Яа-я0-9])/g, "$1 ")
+    .replace(/([^\s])([\(\[{])/g, "$1 $2")
+    .replace(/([^\s])(")/g, "$1 $2")
+    .replace(/"\s*([^"]*?)\s*"/g, ' "$1" ')
+    .replace(/\(\s/g, "(")
+    .replace(/\{\s/g, "{")
+    .replace(/\[\s/g, "[")
+    .replace(/\s\)/g, ")")
+    .replace(/\s\}/g, "}")
+    .replace(/\s\]/g, "]");
   return correctedText;
 };
 

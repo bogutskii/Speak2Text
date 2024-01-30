@@ -3,8 +3,9 @@ import { connect } from "react-redux";
 import {
   toggleRule,
   setAutocorrector,
+  useAutocorrector,
 } from "../../actions/rulesControlActions";
-
+import { updateFinalTranscript } from "../../actions/transcriptActions";
 const RulesComponent = ({
   rules,
   currentRecognitionLanguage,
@@ -12,6 +13,9 @@ const RulesComponent = ({
   interfaceLanguage,
   autocorrector,
   setAutocorrector,
+  updateFinalTranscript,
+  finalTranscript,
+  useAutocorrector
 }) => {
   const handleToggle = (language, ruleName, params) => {
     toggleRule(language, ruleName, params);
@@ -30,6 +34,9 @@ const RulesComponent = ({
 
   const handleToggleAutocorrector = () => {
     setAutocorrector(!autocorrector);
+  };
+  const addSymbol = (symbol) => {
+    updateFinalTranscript(finalTranscript + symbol);
   };
 
   return (
@@ -56,7 +63,8 @@ const RulesComponent = ({
             />
           </label>
           <div className="option-content">
-            <span className="option-name glow-button todo">
+            <span className="option-name glow-button todo"
+              onClick={useAutocorrector}>
               {"autocorrector"}
             </span>
           </div>
@@ -74,7 +82,12 @@ const RulesComponent = ({
               />
             </label>
             <div className="option-content">
-              <span className="option-name glow-button todo">{rule.name}</span>
+              <span
+                className="option-name glow-button todo"
+                onClick={() => addSymbol(rule.symbol)}
+              >
+                {rule.name}
+              </span>
               <span className="option-symbol">{rule.symbol}</span>
             </div>
           </div>
@@ -90,11 +103,14 @@ const mapStateToProps = (state) => ({
   currentRecognitionLanguage: state.transcript.currentRecognitionLanguage,
   interfaceLanguage: state.transcript.interfaceLanguage,
   autocorrector: state.transcript.autocorrector,
+  finalTranscript: state.transcript.finalTranscript,
 });
 
 const mapDispatchToProps = {
   toggleRule,
+  updateFinalTranscript,
   setAutocorrector,
+  useAutocorrector,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(RulesComponent);
