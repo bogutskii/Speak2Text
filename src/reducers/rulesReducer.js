@@ -199,6 +199,11 @@ const rulesReducer = (state = initialRulesState, action) => {
             : rule
         ),
       };
+    case "ADD_RULES":
+      const newState = { ...state };
+      newState[action.payload.language].push(action.payload.rule);
+      console.log(newState);
+      return newState;
     default:
       return state;
   }

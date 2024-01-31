@@ -18,3 +18,10 @@ export const useAutocorrector = (text) => ({
   type: 'USE_AUTOCORRECTOR',
   payload: text
 })
+
+export const addNewRule = (rule,language) => ({
+  type: 'ADD_RULES',
+  payload: {
+    rule, language
+  }
+})
