@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 
-const MicrophoneError = ({ interfaceLanguage, microphoneError, volume }) => {
+const MicrophoneError = ({ interfaceLanguage, microphoneError, volume, isListening }) => {
   const [showError, setShowError] = useState(false);
 
   useEffect(() => {
@@ -21,7 +21,7 @@ const MicrophoneError = ({ interfaceLanguage, microphoneError, volume }) => {
     };
   }, [volume]);
 
-  if (showError && microphoneError) {
+  if (showError && microphoneError && isListening) {
     return (
       <div className="microphone-error">
         {interfaceLanguage.microphone_error_text}
@@ -35,6 +35,7 @@ const MicrophoneError = ({ interfaceLanguage, microphoneError, volume }) => {
 const mapStateToProps = (state) => ({
   microphoneError: state.transcript.microphoneError,
   interfaceLanguage: state.transcript.interfaceLanguage,
+  isListening: state.transcript.isListening,
 });
 
 export default connect(mapStateToProps)(MicrophoneError);

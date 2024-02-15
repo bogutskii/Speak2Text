@@ -11,6 +11,17 @@ const initialRulesState = {
     { name: "percent", active: false, symbol: "%" },
     { name: "at sign", active: false, symbol: "@" },
     { name: "dollar sign", active: false, symbol: "$" },
+    { name: "opening bracket", active: false, symbol: "(" },
+    { name: "closing bracket", active: false, symbol: ")" },
+    { name: "opening square bracket", active: false, symbol: "[" },
+    { name: "closing square bracket", active: false, symbol: "]" },
+    { name: "plus sign", active: false, symbol: "+" },
+    { name: "minus sign", active: false, symbol: "-" },
+    { name: "asterisk", active: false, symbol: "*" },
+    { name: "forward slash", active: false, symbol: "/" },
+    { name: "backslash", active: false, symbol: "\\" },
+    { name: "equals sign", active: false, symbol: "=" },
+    { name: "ampersand", active: false, symbol: "&" },
   ],
   "uk-UA": [
     { name: "кома", active: false, symbol: "," },
@@ -24,6 +35,17 @@ const initialRulesState = {
     { name: "відсоток", active: false, symbol: "%" },
     { name: "собачка", active: false, symbol: "@" },
     { name: "знак долара", active: false, symbol: "$" },
+    { name: "відкриваюча дужка", active: false, symbol: "(" },
+    { name: "закриваюча дужка", active: false, symbol: ")" },
+    { name: "відкриваюча квадратна дужка", active: false, symbol: "[" },
+    { name: "закриваюча квадратна дужка", active: false, symbol: "]" },
+    { name: "знак плюс", active: false, symbol: "+" },
+    { name: "знак мінус", active: false, symbol: "-" },
+    { name: "зірочка", active: false, symbol: "*" },
+    { name: "коса риска", active: false, symbol: "/" },
+    { name: "зворотна коса риска", active: false, symbol: "\\" },
+    { name: "знак рівності", active: false, symbol: "=" },
+    { name: "амперсанд", active: false, symbol: "&" },
   ],
   es: [
     { name: "coma", active: false, symbol: "," },
@@ -102,6 +124,17 @@ const initialRulesState = {
     { name: "процент", active: false, symbol: "%" },
     { name: "собачка", active: false, symbol: "@" },
     { name: "знак доллара", active: false, symbol: "$" },
+    { name: "открытая скобка", active: false, symbol: "(" },
+    { name: "закрытая скобка", active: false, symbol: ")" },
+    { name: "открытая квадратная", active: false, symbol: "[" },
+    { name: "закрытая квадратная", active: false, symbol: "]" },
+    { name: "знак плюс", active: false, symbol: "+" },
+    { name: "знак минус", active: false, symbol: "-" },
+    { name: "звёздочка", active: false, symbol: "*" },
+    { name: "косая черта", active: false, symbol: "/" },
+    { name: "обратная косая", active: false, symbol: "\\" },
+    { name: "равно", active: false, symbol: "=" },
+    { name: "амперсанд", active: false, symbol: "&" },
   ],
   "zh-CN": [
     { name: "逗号", active: false, symbol: "，" },
@@ -147,13 +180,14 @@ const initialRulesState = {
 const rulesReducer = (state = initialRulesState, action) => {
   switch (action.type) {
     case "TOGGLE_RULE":
-      if(action.payload.params === true || action.payload.params === false) {
+      if (action.payload.params === true || action.payload.params === false) {
         return {
           ...state,
-          [action.payload.language]: state[action.payload.language].map((rule) =>
-            rule.name === action.payload.ruleName
-              ? { ...rule, active: action.payload.params }
-              : rule
+          [action.payload.language]: state[action.payload.language].map(
+            (rule) =>
+              rule.name === action.payload.ruleName
+                ? { ...rule, active: action.payload.params }
+                : rule
           ),
         };
       }
@@ -165,6 +199,11 @@ const rulesReducer = (state = initialRulesState, action) => {
             : rule
         ),
       };
+    case "ADD_RULES":
+      const newState = { ...state };
+      newState[action.payload.language].push(action.payload.rule);
+      console.log(newState);
+      return newState;
     default:
       return state;
   }

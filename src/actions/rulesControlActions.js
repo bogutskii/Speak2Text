@@ -8,3 +8,20 @@ export const toggleRule = (language, ruleName, params=null) => {
       }
     };
   };
+
+export const setAutocorrector = (value) => ({
+  type: 'SET_AUTOCORRECTOR',
+  payload: value
+})
+
+export const useAutocorrector = (text) => ({
+  type: 'USE_AUTOCORRECTOR',
+  payload: text
+})
+
+export const addNewRule = (rule,language) => ({
+  type: 'ADD_RULES',
+  payload: {
+    rule, language
+  }
+})

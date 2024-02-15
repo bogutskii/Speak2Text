@@ -70,41 +70,49 @@ export const ContactUs = () => {
         }
       );
   };
-
   return (
     <div className="contact-form-container">
       <form ref={form} onSubmit={sendEmail} className="contact-form">
         <div className="left-column">
-          <label className="form-label">Name</label>
-          <input
-            type="text"
-            name="user_name"
-            className={`form-input ${!isNameValid ? "invalid" : ""}`}
-            value={userName}
-            onChange={handleSetUserName}
-          />
-          <label className="form-label">Email</label>
-          <input
-            type="email"
-            name="user_email"
-            className={`form-input ${!isEmailValid ? "invalid" : ""}`}
-            value={userEmail}
-            onChange={handleSetUserEmail}
-          />
+          <div className="input-container">
+            <input
+              type="text"
+              name="user_name"
+              className={`form-input ${!isNameValid ? "invalid" : ""}`}
+              value={userName}
+              onChange={handleSetUserName}
+              required
+            />
+            <label className="form-label">Name</label>
+          </div>
+
+          <div className="input-container mt-20">
+            <input
+              type="email"
+              name="user_email"
+              className={`form-input ${!isEmailValid ? "invalid" : ""}`}
+              value={userEmail}
+              onChange={handleSetUserEmail}
+              required
+            />
+            <label className="form-label">Email</label>
+          </div>
         </div>
         <div className="right-column">
-          <label className="form-label">Message</label>
-          <textarea
-            name="message"
-            className={`form-textarea ${!isMessageValid ? "invalid" : ""}`}
-            value={userMessage}
-            onChange={handleSetUserMessage}
-            placeholder = 'Your wishes, suggestions, or bug reports'
-          ></textarea>
+          <div className="input-container">
+            <textarea
+              name="message"
+              className={`form-textarea${!isMessageValid ? "invalid" : ""}`}
+              value={userMessage}
+              onChange={handleSetUserMessage}
+              required
+            ></textarea>
+            <label className="form-label top-10">Message</label>
+          </div>
           {messageSent && <div className="message-sent">Message Sent!</div>}
           <input type="submit" value="Send" className="glow-button regular" />
         </div>
       </form>
     </div>
   );
-};
+}

@@ -11,6 +11,23 @@ const SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
 const recognition = new SpeechRecognition();
 
+// const useAutocorrector = (text) => {
+//   let correctedText = text.replace(/\s{2,}/g, " ");
+//   correctedText = correctedText.replace(/\s([.,!?;:{}()\[\]])/g, "$1");
+//   correctedText = correctedText.replace(/([^\s])([\(\[{])/g, "$1 $2");
+//   correctedText = correctedText.replace(/([^\s])(")/g, "$1 $2");
+//   correctedText = correctedText.replace(/\(\s/g, "(");
+//   correctedText = correctedText.replace(/\{\s/g, "{");
+//   correctedText = correctedText.replace(/\[\s/g, "[");
+//   correctedText = correctedText.replace(/\s\)/g, ")");
+//   correctedText = correctedText.replace(/\s\}/g, "}");
+//   correctedText = correctedText.replace(/\s\]/g, "]");
+//   correctedText = correctedText.replace(/"\s*([^"]*?)\s*"/g, ' "$1" ');
+//   correctedText = correctedText.replace(/([.,!?…\\}\])])([^\s])/g, "$1 $2");
+//   return correctedText;
+// };
+
+
 function SpeechRecognitionComponent({
   updateFinalTranscript,
   updateInterimTranscript,
@@ -116,6 +133,7 @@ const mapStateToProps = (state) => ({
   finalTranscript: state.transcript.finalTranscript,
   currentRecognitionLanguage: state.transcript.currentRecognitionLanguage,
   rules: state.rulesControl,
+  autocorrector: state.transcript.autocorrector,
 });
 
 const mapDispatchToProps = {
