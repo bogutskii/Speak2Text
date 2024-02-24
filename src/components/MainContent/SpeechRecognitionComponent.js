@@ -11,23 +11,6 @@ const SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
 const recognition = new SpeechRecognition();
 
-// const useAutocorrector = (text) => {
-//   let correctedText = text.replace(/\s{2,}/g, " ");
-//   correctedText = correctedText.replace(/\s([.,!?;:{}()\[\]])/g, "$1");
-//   correctedText = correctedText.replace(/([^\s])([\(\[{])/g, "$1 $2");
-//   correctedText = correctedText.replace(/([^\s])(")/g, "$1 $2");
-//   correctedText = correctedText.replace(/\(\s/g, "(");
-//   correctedText = correctedText.replace(/\{\s/g, "{");
-//   correctedText = correctedText.replace(/\[\s/g, "[");
-//   correctedText = correctedText.replace(/\s\)/g, ")");
-//   correctedText = correctedText.replace(/\s\}/g, "}");
-//   correctedText = correctedText.replace(/\s\]/g, "]");
-//   correctedText = correctedText.replace(/"\s*([^"]*?)\s*"/g, ' "$1" ');
-//   correctedText = correctedText.replace(/([.,!?…\\}\])])([^\s])/g, "$1 $2");
-//   return correctedText;
-// };
-
-
 function SpeechRecognitionComponent({
   updateFinalTranscript,
   updateInterimTranscript,
@@ -121,7 +104,7 @@ function SpeechRecognitionComponent({
   return (
     <div>
       <TranscriptTextArea />
-      {/* <div className="interim-transcript">{interimTranscript}</div> */}
+      { <div className="interim-transcript">{interimTranscript}</div> }
     </div>
   );
 }
