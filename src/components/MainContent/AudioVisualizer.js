@@ -1,77 +1,94 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { connect } from "react-redux";
 import MicrophoneError from "./MicrophoneError";
 
 const AudioVisualizer = ({ isListening }) => {
   const [volume, setVolume] = useState(0);
-  let audioContext;
-  let analyser;
-  let dataArray;
-  let source;
-  let mediaStream;
+  const audioContextRef = useRef(null);
+  const analyserRef = useRef(null);
+  const dataArrayRef = useRef(null);
+  const sourceRef = useRef(null);
+  const mediaStreamRef = useRef(null);
 
-  const setupMicrophone = async () => {
-    try {
-      mediaStream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      audioContext = new (window.AudioContext || window.webkitAudioContext)();
-      analyser = audioContext.createAnalyser();
-      analyser.fftSize = 256;
-      source = audioContext.createMediaStreamSource(mediaStream);
-      source.connect(analyser);
-      dataArray = new Uint8Array(analyser.frequencyBinCount);
-      draw();
-    } catch (error) {
-      console.error("Error accessing microphone:", error);
-    }
-  };
+  useEffect(() => {
+    let animationFrameId;
 
-  const draw = () => {
-    if (!isListening) {
-      return;
+    const setupMicrophone = async () => {
+      try {
+        const mediaStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        mediaStreamRef.current = mediaStream;
+
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        audioContextRef.current = audioContext;
+
+        const analyser = audioContext.createAnalyser();
+        analyser.fftSize = 256;
+        analyserRef.current = analyser;
+
+        const source = audioContext.createMediaStreamSource(mediaStream);
+        source.connect(analyser);
+        sourceRef.current = source;
+
+        const dataArray = new Uint8Array(analyser.frequencyBinCount);
+        dataArrayRef.current = dataArray;
+
+        draw();
+      } catch (error) {
+        console.error("Error accessing microphone:", error);
+      }
+    };
+
+    const draw = () => {
+      if (!isListening || !analyserRef.current || !dataArrayRef.current) {
+        return;
+      }
+      animationFrameId = requestAnimationFrame(draw);
+      analyserRef.current.getByteFrequencyData(dataArrayRef.current);
+      let sum = dataArrayRef.current.reduce((a, b) => a + b, 0);
+      let average = sum / dataArrayRef.current.length;
+      setVolume(average / 80.0);
+    };
+
+    if (isListening) {
+      setupMicrophone();
+    } else {
+      if (sourceRef.current) {
+        sourceRef.current.disconnect();
+        sourceRef.current = null;
+      }
+      if (audioContextRef.current && audioContextRef.current.state !== 'closed') {
+        audioContextRef.current.close();
+        audioContextRef.current = null;
+      }
+      if (mediaStreamRef.current) {
+        mediaStreamRef.current.getTracks().forEach((track) => track.stop());
+        mediaStreamRef.current = null;
+      }
     }
-    requestAnimationFrame(draw);
-    analyser.getByteFrequencyData(dataArray);
-    let sum = dataArray.reduce((a, b) => a + b, 0);
-    let average = sum / dataArray.length;
-    setVolume(average / 80.0);
-  };
+
+    return () => {
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
+      if (sourceRef.current) sourceRef.current.disconnect();
+      if (audioContextRef.current && audioContextRef.current.state !== 'closed') {
+        audioContextRef.current.close();
+      }
+      if (mediaStreamRef.current) {
+        mediaStreamRef.current.getTracks().forEach((track) => track.stop());
+      }
+    };
+  }, [isListening]);
 
   const calculateColor = (volume) => {
     if (volume > 0.7) {
-      return "rgb(255, 0, 0)"; // Красный цвет при громкости выше 70%
+      return "rgb(255, 0, 0)";
     }
-    return `rgb(${volume * 255}, ${255 - volume * 255}, 0)`; // Интерполяция цвета
+    return `rgb(${volume * 255}, ${255 - volume * 255}, 0)`;
   };
 
   const barColor = isListening ? calculateColor(volume) : "white";
   const barHeight = isListening ? Math.min(volume * 150, 200) : 0;
-
-  useEffect(() => {
-    if (isListening) {
-      setupMicrophone();
-    } else {
-      if (source) {
-        source.disconnect();
-        // eslint-disable-next-line
-        source = null;
-      }
-      if (audioContext) {
-        audioContext.close();
-        // eslint-disable-next-line
-        audioContext = null;
-      }
-      if (mediaStream) {
-        mediaStream.getTracks().forEach((track) => track.stop());
-      }
-    }
-    return () => {
-      if (source) source.disconnect();
-      if (audioContext) audioContext.close();
-      if (mediaStream) {
-        mediaStream.getTracks().forEach((track) => track.stop());
-      }
-    };
-  }, [isListening]);
 
   return (
     <div className="audio-visualizer">
