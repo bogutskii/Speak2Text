@@ -52,10 +52,12 @@ const AudioVisualizer = ({ isListening }) => {
     } else {
       if (source) {
         source.disconnect();
+        // eslint-disable-next-line
         source = null;
       }
       if (audioContext) {
         audioContext.close();
+        // eslint-disable-next-line
         audioContext = null;
       }
       if (mediaStream) {
