@@ -1,5 +1,5 @@
 {
-  "homepage": "https://bogutskii.github.io/speak2text/",
+  "homepage": ".",
   "name": "speak2text",
   "version": "1.0.0",
   "description": "React app for converting speech to text",
