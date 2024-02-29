@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Modal from "../Modal";
 import { ContactUs } from "./ContactUs";
 import LanguageInterfaceToggle from "./LanguageInterfaceToggle";
+import About from "./About";
 export const Menu = () => {
   const [activeModal, setActiveModal] = useState(null);
 
@@ -16,10 +17,10 @@ export const Menu = () => {
   return (
     <div className="menu">
       <button className="button-30" onClick={() => openModal("contact")}>
-        feedback
+        Feedback
       </button>
-      <button className="button-30" onClick={() => openModal("modal2")}>
-        about
+      <button className="button-30" onClick={() => openModal("about")}>
+        About
       </button>
       <a
         type="button"
@@ -100,7 +101,9 @@ export const Menu = () => {
         onClose={closeModal}
         children={<ContactUs />}
       />
-      <Modal isOpen={activeModal === "modal2"} onClose={closeModal} />
+      <Modal isOpen={activeModal === "about"} 
+      onClose={closeModal} 
+      children={<About/>}/>
     </div>
   );
 };

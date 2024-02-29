@@ -72,6 +72,7 @@ export const ContactUs = () => {
   };
   return (
     <div className="contact-form-container">
+      <h1>Feedback</h1>
       <form ref={form} onSubmit={sendEmail} className="contact-form">
         <div className="left-column">
           <div className="input-container">
