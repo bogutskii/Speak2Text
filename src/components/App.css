@@ -290,7 +290,9 @@ background-color: #ddd;
 .interface-language-select{
   height: 100%;
   font-size: 18px;
-  cursor: pointer
+  cursor: pointer;
+  border: none;
+  outline:none;
 }
 
 .language-selector {

@@ -1,17 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   setInterfaceLanguage,
   setCurrentInterface,
   loadLanguageFile,
 } from '../../actions/transcriptActions';
 
-const LanguageInterfaceToggle = ({
-  currentInterfaceLanguage,
-  setInterfaceLanguage,
-  loadLanguageFile,
-  setCurrentInterface,
-}) => {
+const LanguageInterfaceToggle = () => {
+  const currentInterfaceLanguage = useSelector(state => state.transcript.currentInterfaceLanguage);
+  const dispatch = useDispatch();
+
   const [selectedLanguage, setSelectedLanguage] = useState(currentInterfaceLanguage);
   const [isDropdownExpanded, setIsDropdownExpanded] = useState(false);
   const languages = { en: ['EN', 'English'], ukr: ['UA', 'Ukrainian'], ru: ['RU', 'Russian'] };
@@ -19,26 +17,31 @@ const LanguageInterfaceToggle = ({
 
   const handleInterfaceChange = (event) => {
     const selectedValue = event.target.value;
-    setSelectedLanguage(selectedValue);
-    setInterfaceLanguage(selectedValue);
-    loadLanguageFile(selectedValue);
-    setCurrentInterface(selectedValue);
+    if (selectedLanguage !== selectedValue) {
+      setSelectedLanguage(selectedValue);
+      dispatch(setInterfaceLanguage(selectedValue));
+      dispatch(loadLanguageFile(selectedValue));
+      dispatch(setCurrentInterface(selectedValue));
+    }
     setIsDropdownExpanded(false);
   };
-
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (selectRef.current && !selectRef.current.contains(event.target)) {
         setIsDropdownExpanded(false);
+      } else {
+        if (isDropdownExpanded) {
+          setIsDropdownExpanded(false);
+        }
       }
     };
-
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [selectRef]);
-  const handleFocus = () => {
+  }, [isDropdownExpanded]); 
+
+  const toggleDropdown = () => {
     setIsDropdownExpanded(true);
   };
 
@@ -48,7 +51,8 @@ const LanguageInterfaceToggle = ({
         className='interface-language-select'
         value={selectedLanguage}
         onChange={handleInterfaceChange}
-        onFocus={handleFocus}
+        onClick={toggleDropdown} 
+        ref={selectRef}
       >
         {Object.entries(languages).map(([key, value]) => (
           <option key={key} value={key}>
@@ -60,15 +64,4 @@ const LanguageInterfaceToggle = ({
   );
 };
 
-const mapStateToProps = (state) => ({
-  currentInterfaceLanguage: state.transcript.currentInterfaceLanguage,
-  interfaceLanguage: state.transcript.interfaceLanguage,
-});
-
-const mapDispatchToProps = {
-  setInterfaceLanguage,
-  loadLanguageFile,
-  setCurrentInterface,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(LanguageInterfaceToggle);
+export default LanguageInterfaceToggle;
