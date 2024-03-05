@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import Modal from "../Modal";
 import { ContactUs } from "./ContactUs";
 import LanguageInterfaceToggle from "./LanguageInterfaceToggle";
 import About from "./About";
-export const Menu = () => {
+export const Menu = ({interfaceLanguage}) => {
   const [activeModal, setActiveModal] = useState(null);
 
   const openModal = (modalName) => {
@@ -22,6 +23,8 @@ export const Menu = () => {
       <button className="button-30" onClick={() => openModal("about")}>
         About
       </button>
+
+      <div class="tooltip">
       <a
         type="button"
         className="button-30 black"
@@ -94,7 +97,8 @@ export const Menu = () => {
         </svg>
         donation
       </a>
-
+      <span class="tooltiptext">{interfaceLanguage.externalLink || 'Opens external site.'}</span>
+</div>
       <LanguageInterfaceToggle />
       <Modal
         isOpen={activeModal === "contact"}
@@ -108,4 +112,13 @@ export const Menu = () => {
   );
 };
 
-export default Menu;
+const mapStateToProps = (state) => ({
+  interfaceLanguage: state.transcript.interfaceLanguage,
+});
+
+
+
+export default connect(
+  mapStateToProps,
+)(Menu);
+
