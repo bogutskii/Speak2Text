@@ -42,14 +42,14 @@ const LanguageInterfaceToggle = () => {
   }, [isDropdownExpanded]); 
 
   const toggleDropdown = () => {
-    setIsDropdownExpanded(true);
+    setIsDropdownExpanded(!isDropdownExpanded);
   };
 
   return (
     <div className="interface-language-toggle">
       <select
         className='interface-language-select'
-        value={selectedLanguage}
+        value={selectedLanguage} 
         onChange={handleInterfaceChange}
         onClick={toggleDropdown} 
         ref={selectRef}
