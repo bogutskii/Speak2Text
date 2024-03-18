@@ -22,5 +22,6 @@
   ],
   "button_select_all": "Вибрати все",
   "button_unselect_all": "Зняти вибір зі всіх",
-  "rules_title": "Параметри"
+  "rules_title": "Параметри",
+  "externalLink": "Відкривається внешній сайт."
 }

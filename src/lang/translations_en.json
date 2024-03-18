@@ -22,5 +22,6 @@
   ],
   "button_select_all": "Select all",
   "button_unselect_all": "Unselect all",
-  "rules_title": "Options"
+  "rules_title": "Options",
+  "externalLink": "Opens external site."
 }
