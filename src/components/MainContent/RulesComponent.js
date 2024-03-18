@@ -74,6 +74,7 @@ const RulesComponent = ({
         <div className="option-item">
           <label className="option-label">
             <input
+              name='autocorrector'
               type="checkbox"
               checked={autocorrector}
               onChange={handleToggleAutocorrector}
@@ -100,6 +101,7 @@ const RulesComponent = ({
           <div key={rule.name} className="option-item">
             <label className="option-label">
               <input
+                name={rule.name+'unqKey'}
                 type="checkbox"
                 checked={rule.active}
                 onChange={() =>

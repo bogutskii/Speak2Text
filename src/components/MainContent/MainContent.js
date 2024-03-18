@@ -6,17 +6,17 @@ import Toast from "./Toast";
 import RulesComponent from "./RulesComponent";
 
 export const MainContent = () => {
-  return (
+    return (
     <div>
-      <AudioVisualizer />
-      <ButtonContainer />
-      <Toast />
-      <div className="recognition-container">
-      <SpeechRecognitionComponent />
-      <RulesComponent />
-      </div>
+        <AudioVisualizer />
+        <ButtonContainer />
+        <Toast />
+        <div className="recognition-container">
+            <SpeechRecognitionComponent />
+            <RulesComponent />
+        </div>
     </div>
-  );
+    );
 };
 
 export default MainContent;

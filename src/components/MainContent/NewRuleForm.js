@@ -20,7 +20,7 @@ function NewRuleForm({ addNewRule, onClose, currentRecognitionLanguage }) {
 
   return (
     <div className="new-rule-form">
-      <form onSubmit={handleSubmit} className="contact-form p-20">
+      <form name='newRuleFormId' onSubmit={handleSubmit} className="contact-form p-20">
         <div className="input-container mb-0">
           <input
             type="text"
@@ -41,7 +41,7 @@ function NewRuleForm({ addNewRule, onClose, currentRecognitionLanguage }) {
             onChange={(e) => setReplacement(e.target.value)}
             required
           />
-          <label className="form-label">Replacement</label>
+          <label  className="form-label">Replacement</label>
         </div>
         <div className="action-buttons mb-0">
           <input

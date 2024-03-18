@@ -48,6 +48,7 @@ const LanguageInterfaceToggle = () => {
   return (
     <div className="interface-language-toggle">
       <select
+        name='interface-language-select'
         className='interface-language-select'
         value={selectedLanguage}
         onChange={handleInterfaceChange}

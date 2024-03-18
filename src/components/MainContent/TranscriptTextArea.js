@@ -7,6 +7,7 @@ const TranscriptTextArea = ({ finalTranscript, updateFinalTranscript }) => {
   };
   return (
       <textarea
+        name="transcript-text-name"
         className="transcript-text"
         value={finalTranscript}
         onChange={textAreaOnChange}
