@@ -6,7 +6,7 @@ const initialState = {
   isListening: false,
   microphoneError: false,
   currentRecognitionLanguage: "ru-RU",
-  autocorrector: false,
+  autocorrect: false,
   recognitionLanguage: [
     { code: "ru-RU", name: "Russian" },
     { code: "en", name: "English" },
@@ -22,6 +22,7 @@ const initialState = {
   ],
   currentInterfaceLanguage: "en",
   interfaceLanguage: {
+    externalLink:'Opens external site.',
     app_title: "Speech Recognition",
     start_button_text: "Start",
     stop_button_text: "Stop",
@@ -52,8 +53,8 @@ const initialState = {
 const transcriptReducer = (state = initialState, action) => {
   switch (action.type) {
     case "UPDATE_FINAL_TRANSCRIPT":
-      if (state.autocorrector) {
-        const text = Autocorrector(action.payload);
+      if (state.autocorrect) {
+        const text = Autocorrect(action.payload);
         return { ...state, finalTranscript: text };
       } else {
         return { ...state, finalTranscript: action.payload };
@@ -76,8 +77,8 @@ const transcriptReducer = (state = initialState, action) => {
       return { ...state, currentInterfaceLanguage: action.payload };
     case "SET_AUTOCORRECTOR":
       return { ...state, autocorrector: action.payload };
-    case "USE_AUTOCORRECTOR":
-      const text = Autocorrector(state.finalTranscript);
+    case "USE_AUTOCORRECT":
+      const text = Autocorrect(state.finalTranscript);
       return { ...state, finalTranscript: text };
     case "RESET_TRANSCRIPT":
       return {
@@ -92,21 +93,19 @@ const transcriptReducer = (state = initialState, action) => {
   }
 };
 
-const Autocorrector = (text) => {
-  let correctedText = text
-    .replace(/ {2,}/g, " ")
-    .replace(/\s([.,!?;:{}()\[\]])/g, "$1")
-    .replace(/([.,!?…\\}\])])(?=[A-Za-zА-Яа-я0-9])/g, "$1 ")
-    .replace(/([^\s])([\(\[{])/g, "$1 $2")
-    .replace(/([^\s])(")/g, "$1 $2")
-    .replace(/"\s*([^"]*?)\s*"/g, ' "$1" ')
-    .replace(/\(\s/g, "(")
-    .replace(/\{\s/g, "{")
-    .replace(/\[\s/g, "[")
-    .replace(/\s\)/g, ")")
-    .replace(/\s\}/g, "}")
-    .replace(/\s\]/g, "]");
-  return correctedText;
+const Autocorrect = (text) => {
+  return text
+      .replace(/ {2,}/g, " ")
+      .replace(/\s([.,!?;:{}()\[\]])/g, "$1")
+      .replace(/([.,!?…\\}\])])(?=[A-Za-zА-Яа-я0-9])/g, "$1 ")
+      .replace(/([^s])([(\[{])/g, "$1 $2")
+      .replace(/([^\s])(")/g, "$1 $2")
+      .replace(/"\s*([^"]*?)\s*"/g, ' "$1" ')
+      .replace(/\(\s/g, "(")
+      .replace(/\{\s/g, "{")
+      .replace(/\[\s/g, "[")
+      .replace(/\s\)/g, ")")
+      .replace(/\s\}/g, "}")
+      .replace(/\s\]/g, "]");
 };
-
-export default transcriptReducer;
+  export default transcriptReducer;
