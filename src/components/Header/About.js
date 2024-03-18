@@ -17,7 +17,7 @@ function About() {
             <p>The Speech Recognition App was developed by Petr Bogutskii, a dedicated software developer with a passion for
                 creating innovative and user-friendly digital solutions.</p>
             <p>You can contact us through our feedback form.</p>
-            <a href="https://github.com/bogutskii" target="_blank" className="link-with-icon">
+            <a href="https://github.com/bogutskii" target="_blank" className="link-with-icon" rel="noreferrer noopener">
                 <img className="githubLogo" src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub"/>
                 Follow me on GitHub
             </a>
