@@ -9,13 +9,13 @@ export const toggleRule = (language, ruleName, params=null) => {
     };
   };
 
-export const setAutocorrector = (value) => ({
-  type: 'SET_AUTOCORRECTOR',
+export const setAutocorrect = (value) => ({
+  type: 'SET_AUTOCORRECT',
   payload: value
 })
 
-export const useAutocorrector = (text) => ({
-  type: 'USE_AUTOCORRECTOR',
+export const useAutocorrect = (text) => ({
+  type: 'USE_AUTOCORRECT',
   payload: text
 })
 

@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import {
   toggleRule,
-  setAutocorrector,
-  useAutocorrector,
+  setAutocorrect,
+  useAutocorrect,
 } from "../../actions/rulesControlActions";
 import Modal from "../Modal";
 import { updateFinalTranscript } from "../../actions/transcriptActions";
@@ -13,11 +13,11 @@ const RulesComponent = ({
   currentRecognitionLanguage,
   toggleRule,
   interfaceLanguage,
-  autocorrector,
-  setAutocorrector,
+  autocorrect,
+  setAutocorrect,
   updateFinalTranscript,
   finalTranscript,
-  useAutocorrector,
+  useAutocorrect,
 }) => {
   const [activeModal, setActiveModal] = useState(null);
   const handleToggle = (language, ruleName, params) => {
@@ -44,8 +44,8 @@ const RulesComponent = ({
     });
   };
 
-  const handleToggleAutocorrector = () => {
-    setAutocorrector(!autocorrector);
+  const handleToggleAutocorrect = () => {
+    setAutocorrect(!autocorrect);
   };
   const addSymbol = (symbol) => {
     updateFinalTranscript(finalTranscript + symbol);
@@ -74,19 +74,19 @@ const RulesComponent = ({
         <div className="option-item">
           <label className="option-label">
             <input
-              name='autocorrector'
+              name='autocorrect'
               type="checkbox"
-              checked={autocorrector}
-              onChange={handleToggleAutocorrector}
+              checked={autocorrect}
+              onChange={handleToggleAutocorrect}
               className="option-checkbox"
             />
           </label>
           <div className="option-content">
             <span
               className="option-name glow-button todo"
-              onClick={useAutocorrector}
+              onClick={useAutocorrect}
             >
-              {"autocorrector"}
+              {"autocorrect"}
             </span>
 
             <div>
@@ -135,15 +135,15 @@ const mapStateToProps = (state) => ({
   rules: state.rulesControl,
   currentRecognitionLanguage: state.transcript.currentRecognitionLanguage,
   interfaceLanguage: state.transcript.interfaceLanguage,
-  autocorrector: state.transcript.autocorrector,
+  autocorrect: state.transcript.autocorrect,
   finalTranscript: state.transcript.finalTranscript,
 });
 
 const mapDispatchToProps = {
   toggleRule,
   updateFinalTranscript,
-  setAutocorrector,
-  useAutocorrector,
+  setAutocorrect,
+  useAutocorrect,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(RulesComponent);

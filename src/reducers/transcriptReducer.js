@@ -75,8 +75,8 @@ const transcriptReducer = (state = initialState, action) => {
       return { ...state, interfaceLanguage: action.payload };
     case "SET_CURRENT_INTERFACE_LANGUAGE":
       return { ...state, currentInterfaceLanguage: action.payload };
-    case "SET_AUTOCORRECTOR":
-      return { ...state, autocorrector: action.payload };
+    case "SET_AUTOCORRECT":
+      return { ...state, autocorrect: action.payload };
     case "USE_AUTOCORRECT":
       const text = Autocorrect(state.finalTranscript);
       return { ...state, finalTranscript: text };

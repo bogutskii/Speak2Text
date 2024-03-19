@@ -12,14 +12,14 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
-    "@emailjs/browser": "^3.12.1",
+    "@emailjs/browser": "^4.3.3",
     "react": "^18.2.0",
     "react-dom": "18.2.0",
-    "react-redux": "^9.0.4",
-    "react-scripts": "5.0.0",
-    "redux": "5.0.0",
+    "react-redux": "^9.1.0",
+    "react-scripts": "5.0.1",
+    "redux": "5.0.1",
     "redux-thunk": "^3.1.0",
-    "web-vitals": "^1.1.2"
+    "web-vitals": "^3.5.2"
   },
   "eslintConfig": {
     "extends": [
@@ -40,7 +40,7 @@
     ]
   },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.x.x",
-    "gh-pages": "^6.0.0"
+    "@babel/plugin-transform-private-property-in-object": "^7.23.4",
+    "gh-pages": "^6.1.1"
   }
 }

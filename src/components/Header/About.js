@@ -1,7 +1,6 @@
 import React from 'react'
 
 function About() {
-    const year = new Date().getFullYear();
     return (
         <div>
             <h1>About</h1>
@@ -21,7 +20,7 @@ function About() {
                 <img className="githubLogo" src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub"/>
                 Follow me on GitHub
             </a>
-            <p className="copyright">© {year} Petr Bogutskii</p>
+            <p className="copyright">© {new Date().getFullYear()} Petr Bogutskii</p>
         </div>
     );
 }

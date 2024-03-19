@@ -116,7 +116,7 @@ const mapStateToProps = (state) => ({
   finalTranscript: state.transcript.finalTranscript,
   currentRecognitionLanguage: state.transcript.currentRecognitionLanguage,
   rules: state.rulesControl,
-  autocorrector: state.transcript.autocorrector,
+  autocorrect: state.transcript.autocorrect,
 });
 
 const mapDispatchToProps = {

@@ -41,8 +41,8 @@ export const setCopiedToClipboard = (value) => ({
   payload: value,
 });
 
-export const setAutocorrector = (value) => ({
-  type: "SET_AUTOCORRECTOR",
+export const setAutocorrect = (value) => ({
+  type: "SET_AUTOCORRECT",
   payload: value,
 });
 
